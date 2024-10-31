@@ -16,7 +16,8 @@
     "format": "prettier \"src/**/*.{ts,tsx,js,jsx}\" --write",
     "formatcheck": "prettier \"src/**/*.{ts,tsx,js,jsx}\" --check",
     "stylelint": "stylelint \"src/**/*.{scss,css}\"",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -36,6 +37,8 @@
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.10",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "sass": "^1.80.5",
@@ -43,5 +46,12 @@
     "stylelint-config-standard-scss": "^13.1.0",
     "typescript": "^5.2.2",
     "vite": "^5.1.0"
+  },
+  "lint-staged": {
+    "src/**/*.{scss,css}": "stylelint",
+    "src/**/*.{ts,tsx,js,jsx}": [
+      "prettier --write",
+      "eslint"
+    ]
   }
 }
