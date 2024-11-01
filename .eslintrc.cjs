@@ -34,6 +34,21 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   plugins: ['react-refresh', 'import'],
+  overrides: [
+    {
+      files: ['*.test.ts', '*.test.tsx', '**/setupTests.ts'],
+      extends: [
+        'plugin:jest/recommended',
+        'plugin:jest-dom/recommended',
+        'plugin:testing-library/react',
+      ],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-argument': 'off',
+      },
+    },
+  ],
   rules: {
     '@typescript-eslint/consistent-type-definitions': 0,
     'import/no-named-as-default-member': 0,
