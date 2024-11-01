@@ -1,0 +1,53 @@
+$font-primary: 'Roboto', helvetica;
+$font-size-xs: 12px;
+$font-size-s: 14px;
+$font-size-m: 18px;
+$font-size-l: 24px;
+$base-font-size: $font-size-s;
+$weight-regular: 400;
+$weight-medium: 500;
+$weight-bold: 700;
+$font-style-italic: italic;
+$base-letter-spacing: 0;
+
+%font-l-bold {
+  font-size: $font-size-l;
+  font-weight: $weight-bold;
+  line-height: 32px;
+}
+
+%font-m-bold {
+  font-size: $font-size-m;
+  font-weight: $weight-bold;
+  line-height: 24px;
+}
+
+%font-s-bold {
+  font-size: $font-size-s;
+  font-weight: $weight-bold;
+  line-height: 20px;
+}
+
+%font-s-medium {
+  font-size: $font-size-s;
+  font-weight: $weight-medium;
+  line-height: 20px;
+}
+
+%font-s-regular {
+  font-size: $font-size-s;
+  font-weight: $weight-regular;
+  line-height: 20px;
+}
+
+%font-xs-bold {
+  font-size: $font-size-xs;
+  font-weight: $weight-bold;
+  line-height: 16px;
+}
+
+%font-xs-regular {
+  font-size: $font-size-xs;
+  font-weight: $weight-regular;
+  line-height: 16px;
+}
