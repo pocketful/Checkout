@@ -1,0 +1,13 @@
+@import './sizes';
+
+@mixin for($size) {
+  @if $size == ScreenSM {
+    @media (min-width: $screen-sm) {
+      @content;
+    }
+  } @else if $size == ScreenMD {
+    @media (min-width: $screen-md) {
+      @content;
+    }
+  }
+}
