@@ -1,4 +1,5 @@
 $font-primary: 'Roboto', helvetica;
+$font-secondary: 'Poppins', sans-serif;
 $font-size-xs: 12px;
 $font-size-s: 14px;
 $font-size-m: 18px;
@@ -50,4 +51,20 @@ $base-letter-spacing: 0;
   font-size: $font-size-xs;
   font-weight: $weight-regular;
   line-height: 16px;
+}
+
+%font-secondary-s-bold {
+  font-family: $font-secondary;
+  font-size: $font-size-s;
+  font-weight: $weight-bold;
+  line-height: 24px;
+  letter-spacing: 0.07em;
+}
+
+%font-secondary-m-bold {
+  font-family: $font-secondary;
+  font-size: $font-size-m;
+  font-weight: $weight-bold;
+  line-height: 24px;
+  letter-spacing: 0.07em;
 }

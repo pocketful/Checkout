@@ -1,0 +1,33 @@
+@use 'sass:color';
+@import '/src/styles/colors';
+@import '/src/styles/media-queries';
+@import '/src/styles/typography';
+
+.button {
+  @extend %font-secondary-s-bold;
+
+  width: 100%;
+  padding: 16px 32px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 4px 10px 0 $shadow-color;
+  transition: background 0.2s;
+  text-transform: uppercase;
+
+  &.primary {
+    background: $button-primary-color;
+    color: $white;
+
+    &:hover {
+      background: color.scale($button-primary-color, $lightness: -15%);
+    }
+
+    &:active {
+      background: color.scale($button-primary-color, $lightness: -30%);
+    }
+  }
+
+  @include for(ScreenMD) {
+    font-size: $font-size-m;
+  }
+}
