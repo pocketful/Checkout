@@ -1,0 +1,40 @@
+@import '/src/styles/colors';
+@import '/src/styles/typography';
+
+.selectGroup {
+  position: relative;
+  width: 100%;
+}
+
+.label {
+  @extend %font-xs-regular;
+
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  color: $gray-4;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.select {
+  @extend  %font-s-regular;
+
+  cursor: pointer;
+  font-family: inherit;
+  color: $font-color;
+  background: transparent;
+  background-image: url('/src/assets/UI/arrow-down.svg');
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  width: 100%;
+  padding: 24px 16px 8px;
+  border: 1px solid $gray-3;
+  border-radius: 6px;
+  appearance: none;
+
+  &:focus {
+    outline: none;
+    border: 1px solid $active-color;
+  }
+}
