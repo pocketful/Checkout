@@ -1,45 +1,6 @@
+@import '/src/styles/colors';
 @import '/src/styles/media-queries';
 @import '/src/styles/sizes';
-
-// TEMP
-.header {
-  height: 100px;
-  background-color: rgb(206, 187, 178);
-}
-.orderForm {
-  height: 800px;
-  background-color: rgb(212, 212, 137);
-}
-.orderOverview {
-  height: 150px;
-  background-color: rgb(177, 211, 147);
-}
-.about {
-  height: 200px;
-  background-color: rgb(220, 177, 157);
-}
-.container {
-  background-color: rgb(246, 210, 214);
-}
-// ---
-
-.header {
-  width: 100%;
-
-  .wrapper {
-    margin: 0 auto;
-    max-width: $container-max-w;
-    padding: $wrapper-pd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    @include for(ScreenMD) {
-      padding-left: $wrapper-pd-md;
-      padding-right: $wrapper-pd-md;
-    }
-  }
-}
 
 .container {
   margin: 0 auto;
@@ -48,10 +9,23 @@
   padding-right: $wrapper-pd;
 
   @include for(ScreenMD) {
-    padding: 40px $wrapper-pd-md 24px $wrapper-pd-md;
+    position: relative;
+    padding: 40px $wrapper-pd-md 24px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto 1fr;
+
+    &::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 50%;
+      width: 50vw;
+      height: 100vh;
+      background-color: $foreground-color;
+      z-index: -1;
+      border-left: 1px solid $gray-3;
+    }
 
     .orderForm {
       grid-column: 1;
