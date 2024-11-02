@@ -5,12 +5,15 @@
 .container {
   margin: 0 auto;
   max-width: $container-max-w;
-  padding-left: $wrapper-pd;
-  padding-right: $wrapper-pd;
+  
+  // padding-left: $wrapper-pd;
+  // padding-right: $wrapper-pd;
 
   @include for(ScreenMD) {
     position: relative;
-    padding: 40px $wrapper-pd-md 24px;
+    padding-top: 32px;
+    padding-left: $wrapper-pd-md;
+    padding-right: $wrapper-pd-md;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto 1fr;
@@ -27,23 +30,23 @@
       border-left: 1px solid $gray-3;
     }
 
-    .orderForm {
+    .sectionOrderForm {
       grid-column: 1;
       grid-row: 1 / 3;
       padding-right: $wrapper-pd-md;
     }
 
-    .orderOverview,
-    .about {
+    .sectionOrderOverview,
+    .sectionAbout {
       grid-column: 2;
       padding-left: $wrapper-pd-md;
     }
 
-    .orderOverview {
+    .sectionOrderOverview {
       grid-row: 1;
     }
 
-    .about {
+    .sectionAbout {
       grid-row: 2;
     }
   }

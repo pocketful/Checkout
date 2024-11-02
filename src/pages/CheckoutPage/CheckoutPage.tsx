@@ -1,13 +1,23 @@
 import style from './CheckoutPage.module.scss'
+import Header from '../../components/Header/Header'
+import OrderOverview from './OrderOverview/OrderOverview'
+import OrderForm from './OrderForm/OrderForm'
+import About from './About/About'
 
-const CheckoutPage = () => {
+function CheckoutPage() {
   return (
     <>
-      <header className={style.header}></header>
+      <Header />
       <main className={style.container}>
-        <section className={style.orderOverview}>orderOverview</section>
-        <div className={style.orderForm}>orderForm</div>
-        <section className={style.about}>about</section>
+        <div className={style.sectionOrderOverview}>
+          <OrderOverview />
+        </div>
+        <div className={style.sectionOrderForm}>
+          <OrderForm />
+        </div>
+        <div className={style.sectionAbout}>
+          <About />
+        </div>
       </main>
     </>
   )

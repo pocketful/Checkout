@@ -1,21 +1,32 @@
 @import '/src/styles/colors';
+@import '/src/styles/media-queries';
+@import '/src/styles/sizes';
 @import '/src/styles/typography';
 
-.titleWrapper {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 16px;
-  gap: 16px;
+.about {
+  padding: 16px $wrapper-pd 0;
+  background-color: $foreground-color;
 
-  &::before,
-  &::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px solid $gray-3;
+  .titleWrapper {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 16px;
+    gap: 16px;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid $gray-3;
+    }
+
+    .title {
+      @extend %font-s-regular;
+    }
   }
 
-  .title {
-    @extend %font-s-regular;
+  @include for(ScreenMD) {
+    padding: 0;
   }
 }
