@@ -1,0 +1,21 @@
+@import '/src/styles/typography';
+
+.item {
+  display: flex;
+  margin-bottom: 16px;
+
+  .icon {
+    align-self: flex-start;
+    margin-right: 16px;
+  }
+
+  .subtitle {
+    @extend %font-xs-bold;
+
+    margin-bottom: 8px;
+  }
+
+  .text {
+    @extend %font-xs-regular;
+  }
+}
