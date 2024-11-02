@@ -1,0 +1,39 @@
+@import '/src/styles/colors';
+@import '/src/styles/media-queries';
+@import '/src/styles/sizes';
+
+.header {
+  background-color: $white;
+  border-bottom: 1px solid $gray-3;
+  width: 100%;
+
+  .wrapper {
+    margin: 0 auto;
+    max-width: $container-max-w;
+    padding: $wrapper-pd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include for(ScreenMD) {
+      padding-left: $wrapper-pd-md;
+      padding-right: $wrapper-pd-md;
+    }
+  }
+
+  .logo {
+    height: 24px;
+
+    @include for(ScreenMD) {
+      height: 40px;
+    }
+  }
+
+  .shoppingBag {
+    height: 20px;
+
+    @include for(ScreenMD) {
+      height: 24px;
+    }
+  }
+}
