@@ -1,0 +1,155 @@
+@import '/src/styles/colors';
+@import '/src/styles/media-queries';
+@import '/src/styles/typography';
+
+.title {
+  @extend %font-s-regular;
+
+  margin-right: 8px;
+}
+
+.price {
+  @extend %font-s-medium;
+}
+
+.productListGroup {
+  border-top: 1px solid $gray-3;
+  border-bottom: 1px solid $gray-3;
+}
+
+.subtotalGroup,
+.totalGroup {
+  border-bottom: 1px solid $gray-3;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subtotalGroup {
+  @extend %font-s-regular;
+}
+
+.totalGroup {
+  @extend %font-m-bold;
+}
+
+.productCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  .productImgWrapper {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin-right: 16px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid $gray-3;
+    }
+
+    .productAmount {
+      position: absolute;
+      top: -10.5px;
+      right: -10.5px;
+      font-size: $font-size-xs;
+      font-weight: $weight-bold;
+      line-height: 21px;
+      background: $gray-5;
+      color: $white;
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      text-align: center;
+    }
+  }
+
+  .productName {
+    @extend %font-s-bold;
+
+    flex: 1;
+  }
+}
+
+// Component styles
+.orderOverview {
+  background: $foreground-color;
+
+  .orderExpanded {
+    padding-left: $wrapper-pd;
+    padding-right: $wrapper-pd;
+  }
+
+  button {
+    font-family: inherit;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 16px;
+
+    .arrowIcon {
+      transition: transform 0.3s ease;
+    }
+  }
+
+  // Hide content by default on mobile
+  .productListGroup,
+  .subtotalGroup,
+  .totalGroup {
+    display: none;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  // Show content on mobile when expanded
+  &.expanded {
+    padding-bottom: 16px;
+
+    .productListGroup,
+    .subtotalGroup,
+    .totalGroup {
+      display: flex;
+    }
+
+    .arrowIcon {
+      transform: rotate(180deg);
+    }
+  }
+
+  // Desktop styles
+  @include for(ScreenMD) {
+    margin-bottom: 8px;
+
+    button {
+      display: none;
+    }
+
+    .productListGroup,
+    .subtotalGroup,
+    .totalGroup {
+      display: flex;
+    }
+
+    .orderExpanded {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .productListGroup {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .totalGroup {
+      border-bottom: none;
+    }
+  }
+}
