@@ -12,7 +12,7 @@
   @extend %font-s-medium;
 }
 
-.productListGroup {
+.productGroup {
   border-top: 1px solid $gray-3;
   border-bottom: 1px solid $gray-3;
 }
@@ -54,8 +54,8 @@
 
     .productAmount {
       position: absolute;
-      top: -10.5px;
-      right: -10.5px;
+      top: -10px;
+      right: -10px;
       font-size: $font-size-xs;
       font-weight: $weight-bold;
       line-height: 21px;
@@ -64,7 +64,11 @@
       width: 21px;
       height: 21px;
       border-radius: 50%;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-left: 7px;
+      padding-right: 7px;
     }
   }
 
@@ -72,6 +76,7 @@
     @extend %font-s-bold;
 
     flex: 1;
+    margin-right: 16px;
   }
 }
 
@@ -101,7 +106,7 @@
   }
 
   // Hide content by default on mobile
-  .productListGroup,
+  .productGroup,
   .subtotalGroup,
   .totalGroup {
     display: none;
@@ -113,7 +118,7 @@
   &.expanded {
     padding-bottom: 16px;
 
-    .productListGroup,
+    .productGroup,
     .subtotalGroup,
     .totalGroup {
       display: flex;
@@ -128,11 +133,12 @@
   @include for(ScreenMD) {
     margin-bottom: 8px;
 
-    button {
+    button,
+    .warranty {
       display: none;
     }
 
-    .productListGroup,
+    .productGroup,
     .subtotalGroup,
     .totalGroup {
       display: flex;
@@ -143,7 +149,7 @@
       padding-right: 0;
     }
 
-    .productListGroup {
+    .productGroup {
       border-top: none;
       padding-top: 0;
     }
