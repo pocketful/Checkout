@@ -57,6 +57,12 @@ describe('Select', () => {
     expect(screen.queryAllByRole('option')).toHaveLength(0)
   })
 
+  it('renders error message', () => {
+    renderSelect({ error: 'This field is required' })
+    expect(screen.getByText('This field is required')).toBeInTheDocument()
+    expect(screen.getByRole('combobox')).toHaveClass('errSelect')
+  })
+
   it('has correct accessibility attributes', () => {
     renderSelect({ 'aria-label': 'Select country' })
     expect(screen.getByRole('combobox')).toHaveAttribute('aria-label', 'Select country')

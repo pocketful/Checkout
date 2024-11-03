@@ -24,11 +24,13 @@ const validationSchema = Yup.object({
     .min(2, 'Last name must be at least 2 characters')
     .max(50, 'Last name must not exceed 50 characters')
     .required('Last name is required'),
+  selectedCountry: Yup.string().required('Please select a country'),
 })
 
 type FormValues = {
   first_name: string
   last_name: string
+  selectedCountry: string
 }
 
 // simulate async
@@ -46,6 +48,7 @@ const OrderForm = () => {
     defaultValues: {
       first_name: '',
       last_name: '',
+      selectedCountry: '',
     },
   })
 
@@ -106,10 +109,12 @@ const OrderForm = () => {
                 placeholder="ZIP / Postal Code"
               />
               <Select
+                {...register('selectedCountry')}
                 className={style.countryInput}
                 label="Country"
                 name="selectedCountry"
                 options={countries}
+                error={errors.selectedCountry?.message}
               />
             </div>
           </div>

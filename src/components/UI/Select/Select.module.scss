@@ -35,3 +35,18 @@
     border: 1px solid $active-color;
   }
 }
+
+.errSelect {
+  border-color: $red;
+
+  &:focus {
+    border-color: $red;
+    box-shadow: 0 0 0 1px $red;
+  }
+}
+
+.errText {
+  color: $red;
+  font-size: $font-size-xs;
+  padding-left: 16px;
+}
