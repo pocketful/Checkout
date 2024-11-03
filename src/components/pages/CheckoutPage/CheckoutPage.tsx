@@ -9,17 +9,19 @@ function CheckoutPage() {
   return (
     <>
       <Header />
-      <main className={style.container}>
-        <div className={style.sectionSummary}>
-          <Summary product={product} />
-        </div>
-        <div className={style.sectionOrderForm}>
-          <OrderForm />
-        </div>
-        <div className={style.sectionBenefits}>
-          <Benefits />
-        </div>
-      </main>
+      <div className={style.containerWrapper}>
+        <main className={style.container}>
+          <div className={style.sectionSummary}>
+            <Summary product={product} />
+          </div>
+          <div className={style.sectionOrderForm}>
+            <OrderForm />
+          </div>
+          <div className={style.sectionBenefits}>
+            <Benefits />
+          </div>
+        </main>
+      </div>
     </>
   )
 }

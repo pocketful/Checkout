@@ -96,12 +96,21 @@
 .secureWrapper {
   @extend %font-s-regular;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: $gray-4;
-  text-align: center;
-  padding-top: 16px;
+  margin-top: 16px;
 
   .lockIcon {
     margin-right: 8px;
+    margin-top: 2px;
+    height: 14px;
+  }
+
+  // margin-top: 4px;
+  > span {
+    height: 14px;
   }
 }
 
@@ -145,7 +154,7 @@
         }
       }
 
-      @include for(ScreenMD) {
+      @include for(ScreenLG) {
         grid-template-columns: repeat(3, 1fr);
         grid-template-areas:
           'city state zip'

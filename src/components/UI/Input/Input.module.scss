@@ -1,6 +1,6 @@
 .input {
   @extend %font-s-regular;
-  
+
   font-family: inherit;
   color: $font-color;
   background-color: $white;
@@ -8,6 +8,7 @@
   padding: 15px;
   border: 1px solid $gray-3;
   border-radius: 6px;
+  height: 52px;
 
   &:focus {
     outline: none;

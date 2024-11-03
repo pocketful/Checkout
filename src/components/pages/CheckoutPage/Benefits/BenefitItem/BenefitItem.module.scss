@@ -15,5 +15,7 @@
 
   .text {
     @extend %font-xs-regular;
+
+    color: $font-secondary-color;
   }
 }

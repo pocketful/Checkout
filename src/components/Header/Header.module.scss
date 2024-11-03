@@ -9,12 +9,8 @@
     padding: $wrapper-pd;
     display: flex;
     justify-content: space-between;
-    align-items: center;
 
-    @include for(ScreenMD) {
-      padding-left: $wrapper-pd-md;
-      padding-right: $wrapper-pd-md;
-    }
+    // align-items: center;
   }
 
   .logo {
