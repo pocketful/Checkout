@@ -1,12 +1,12 @@
-import style from './InfoItem.module.scss'
+import style from './BenefitItem.module.scss'
 
-interface InfoItemProps {
+interface BenefitItemProps {
   icon: string
   subtitle: string
   text: string
 }
 
-const InfoItem = ({ icon, subtitle, text }: InfoItemProps) => {
+const BenefitItem = ({ icon, subtitle, text }: BenefitItemProps) => {
   return (
     <div className={style.item}>
       <img className={style.icon} src={icon} alt="icon" />
@@ -18,4 +18,4 @@ const InfoItem = ({ icon, subtitle, text }: InfoItemProps) => {
   )
 }
 
-export default InfoItem
+export default BenefitItem

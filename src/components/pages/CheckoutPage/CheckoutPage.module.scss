@@ -36,17 +36,17 @@
       padding-right: $wrapper-pd-md;
     }
 
-    .sectionOrderOverview,
-    .sectionAbout {
+    .sectionSummary,
+    .sectionBenefits {
       grid-column: 2;
       padding-left: $wrapper-pd-md;
     }
 
-    .sectionOrderOverview {
+    .sectionSummary {
       grid-row: 1;
     }
 
-    .sectionAbout {
+    .sectionBenefits {
       grid-row: 2;
     }
   }

@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import style from './OrderOverview.module.scss'
-import arrowDown from '../../../assets/UI/arrow-down.svg'
-import { PRODUCT_IMAGE, PRODUCT_ALT, PRODUCT_NAME, PRODUCT_PRICE } from '../../../data/product'
-import { formatCurrency } from '../../../utils/utils'
+import style from './Summary.module.scss'
+import arrowDown from '../../../../assets/UI/arrow-down.svg'
+import { PRODUCT_IMAGE, PRODUCT_ALT, PRODUCT_NAME, PRODUCT_PRICE } from '../../../../data/product'
+import { formatCurrency } from '../../../../utils/utils'
 
-const OrderOverview = () => {
+const Summary = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   // const [quantity, setQuantity] = useState(1)
   const current = '$'
@@ -19,7 +19,7 @@ const OrderOverview = () => {
   const formattedSubtotal = formatCurrency(subtotal, current)
 
   return (
-    <section className={`${style.orderOverview} ${isExpanded ? style.expanded : ''}`}>
+    <section className={`${style.summary} ${isExpanded ? style.expanded : ''}`}>
       {/* Only mobile */}
       <button onClick={() => setIsExpanded(!isExpanded)}>
         <div>
@@ -56,4 +56,4 @@ const OrderOverview = () => {
   )
 }
 
-export default OrderOverview
+export default Summary

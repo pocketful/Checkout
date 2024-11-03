@@ -3,8 +3,8 @@
 @import '/src/styles/sizes';
 @import '/src/styles/typography';
 
-.about {
-  padding: 16px $wrapper-pd 0;
+.benefits {
+  padding: 16px $wrapper-pd 24px;
   background-color: $foreground-color;
 
   .titleWrapper {
