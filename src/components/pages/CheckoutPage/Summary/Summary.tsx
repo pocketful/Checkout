@@ -34,7 +34,12 @@ const Summary = ({ product }: SummaryProps) => {
         <div className={style.productGroup}>
           <article className={style.productCard}>
             <div className={style.productImgWrapper}>
-              <img src={image.small} alt={image.alt}></img>
+              <img
+                src={image.small}
+                srcSet={`${image.small} 180w, ${image.medium} 240w`}
+                sizes="(min-width: 768px) 240px, 180px"
+                alt={image.alt}
+              ></img>
               <span className={style.productAmount}>{quantity}</span>
             </div>
             <div className={style.productName}>{title} + Warranty</div>
