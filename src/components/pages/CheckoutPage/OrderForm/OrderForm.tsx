@@ -1,4 +1,6 @@
-// Assets
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as Yup from 'yup'
 import amex from '@/assets/cards/card-amex.svg'
 import visa from '@/assets/cards/card-visa.svg'
 import mastercard from '@/assets/cards/card-mastercard.svg'
@@ -13,10 +15,55 @@ import { states } from '@/data/states'
 import { countries } from '@/data/countries'
 import style from './OrderForm.module.scss'
 
+const validationSchema = Yup.object({
+  first_name: Yup.string()
+    .min(2, 'First name must be at least 2 characters')
+    .max(50, 'First name must not exceed 50 characters')
+    .required('First name is required'),
+  last_name: Yup.string()
+    .min(2, 'Last name must be at least 2 characters')
+    .max(50, 'Last name must not exceed 50 characters')
+    .required('Last name is required'),
+})
+
+type FormValues = {
+  first_name: string
+  last_name: string
+}
+
+// simulate async
+// const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
 const OrderForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: yupResolver(validationSchema),
+    // mode: 'onTouched'
+    mode: 'onChange',
+    defaultValues: {
+      first_name: '',
+      last_name: '',
+    },
+  })
+
+  console.log(' errors: ', errors)
+
+  const onSubmit = (data: FormValues) => {
+    // const onSubmit = async (data: FormValues) => {
+    // await sleep(2000)
+    try {
+      console.log('submitted values: ', data)
+    } catch (error) {
+      console.error('Form submission error:', error)
+    }
+  }
+
   return (
     <section className={style.orderForm}>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <section className={`${style.formSection} ${style.contactSection}`}>
           <h2>Contact</h2>
           <div>
@@ -28,8 +75,18 @@ const OrderForm = () => {
           <h2>Delivery</h2>
           <div className={style.deliveryInputs}>
             <div className={style.fullNameGroup}>
-              <Input type="text" name="first_name" placeholder="First Name" />
-              <Input type="text" name="last_name" placeholder="Last Name" />
+              <Input
+                type="text"
+                {...register('first_name')}
+                placeholder="First Name"
+                error={errors.first_name?.message}
+              />
+              <Input
+                type="text"
+                {...register('last_name')}
+                placeholder="Last Name"
+                error={errors.last_name?.message}
+              />
             </div>
 
             <Input type="text" name="address" placeholder="Address" />

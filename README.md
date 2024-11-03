@@ -4,6 +4,7 @@ A single-page React checkout form.
 
 # 🔧 Technologies used
 
+- Form validation: [React Hook Form](https://react-hook-form.com/) with [Yup](https://github.com/jquense/yup)
 - JavaScript library: [React](https://reactjs.org/)
 - TypeScript support: [TypeScript](https://www.typescriptlang.org/)
 - Testing: [Jest](https://jestjs.io/) / [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) / [Jest-DOM](https://testing-library.com/docs/ecosystem-jest-dom/) / [User Event](https://testing-library.com/docs/user-event/intro/)

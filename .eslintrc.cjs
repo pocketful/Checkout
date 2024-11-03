@@ -57,5 +57,13 @@ module.exports = {
   rules: {
     '@typescript-eslint/consistent-type-definitions': 0,
     'import/no-named-as-default-member': 0,
+    '@typescript-eslint/no-misused-promises': [
+      'error',
+      {
+        checksVoidReturn: false,
+        checksConditionals: true,
+        checksSpreads: true,
+      },
+    ],
   },
 }

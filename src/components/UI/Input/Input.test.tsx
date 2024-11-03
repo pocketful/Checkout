@@ -49,4 +49,10 @@ describe('Input', () => {
     render(<Input placeholder="Enter text" />)
     expect(screen.getByPlaceholderText('Enter text')).toBeInTheDocument()
   })
+
+  it('renders error message', () => {
+    render(<Input error="This field is required" />)
+    expect(screen.getByText('This field is required')).toBeInTheDocument()
+    expect(screen.getByRole('textbox')).toHaveClass('errInput')
+  })
 })
