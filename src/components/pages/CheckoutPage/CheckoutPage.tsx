@@ -15,7 +15,7 @@ function CheckoutPage() {
             <Summary product={product} />
           </div>
           <div className={style.sectionOrderForm}>
-            <OrderForm />
+            <OrderForm product={product} />
           </div>
           <div className={style.sectionBenefits}>
             <Benefits />

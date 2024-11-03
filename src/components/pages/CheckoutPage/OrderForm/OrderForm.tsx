@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
@@ -14,6 +15,10 @@ import Select from '@/components/UI/Select/Select'
 import { states } from '@/data/states'
 import { countries } from '@/data/countries'
 import style from './OrderForm.module.scss'
+import { useState } from 'react'
+import { useProductPricing } from '@/hooks/useProductPricing'
+import { Product } from '@/data/product'
+import { useOrderContext } from '@/context/OrderContext'
 
 const validationSchema = Yup.object({
   first_name: Yup.string()
@@ -35,8 +40,21 @@ type FormValues = {
 
 // simulate async
 // const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+interface OrderFormProps {
+  product: Product
+}
 
-const OrderForm = () => {
+const OrderForm = ({ product }: OrderFormProps) => {
+  const [paymentMethod, setPaymentMethod] = useState<string>('Credit Card')
+
+  const { warranty } = useOrderContext()
+
+  const { formattedPrice, formattedSubtotal, formattedTotal } = useProductPricing({
+    price: product.price,
+    quantity: product.quantity,
+    currency: product.currency,
+  })
+
   const {
     register,
     handleSubmit,
@@ -53,12 +71,25 @@ const OrderForm = () => {
   })
 
   console.log(' errors: ', errors)
+  console.log('orderData from localStorage', localStorage.getItem('orderData'))
 
   const onSubmit = (data: FormValues) => {
     // const onSubmit = async (data: FormValues) => {
     // await sleep(2000)
     try {
-      console.log('submitted values: ', data)
+      const orderData = {
+        ...data,
+        warranty,
+        paymentMethod,
+        product,
+        formattedPrice,
+        formattedSubtotal,
+        formattedTotal,
+      }
+
+      console.log('orderData: ', orderData)
+
+      localStorage.setItem('orderData', JSON.stringify(orderData))
     } catch (error) {
       console.error('Form submission error:', error)
     }
@@ -127,7 +158,7 @@ const OrderForm = () => {
             <div className={style.cardHeading}>
               <div className={style.selectCardWrapper}>
                 <RadioButton isSelected={true} />
-                <span>Credit Card</span>
+                <span>{paymentMethod}</span>
               </div>
               <div className={style.cardIcons}>
                 <img className={style.cardIcon} src={visa} alt="visa card" />
