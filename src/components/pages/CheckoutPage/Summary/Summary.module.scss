@@ -131,8 +131,7 @@
   @include for(ScreenMD) {
     padding-bottom: 24px;
 
-    button,
-    .warranty {
+    button {
       display: none;
     }
 

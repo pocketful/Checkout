@@ -3,6 +3,7 @@ import arrowDown from '@/assets/UI/arrow-down.svg'
 import { Product } from '@/data/product'
 import style from './Summary.module.scss'
 import { useProductPricing } from '@/hooks/useProductPricing'
+import { useOrderContext } from '@/context/OrderContext'
 
 interface SummaryProps {
   product: Product
@@ -12,6 +13,7 @@ const Summary = ({ product }: SummaryProps) => {
   const { title, price, quantity, currency, image } = product
 
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
+  const { warranty } = useOrderContext()
 
   const { formattedPrice, formattedSubtotal, formattedTotal } = useProductPricing({
     price,
@@ -42,7 +44,10 @@ const Summary = ({ product }: SummaryProps) => {
               ></img>
               <span className={style.productAmount}>{quantity}</span>
             </div>
-            <div className={style.productName}>{title} + Warranty</div>
+            <div className={style.productName}>
+              {title}
+              {warranty && <span className={style.warranty}> + Warranty</span>}
+            </div>
             <span className={style.price}>{formattedPrice}</span>
           </article>
         </div>
