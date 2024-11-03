@@ -2,18 +2,21 @@ import { useState } from 'react'
 import style from './OrderOverview.module.scss'
 import arrowDown from '../../../assets/UI/arrow-down.svg'
 import { PRODUCT_IMAGE, PRODUCT_ALT, PRODUCT_NAME, PRODUCT_PRICE } from '../../../data/product'
+import { formatCurrency } from '../../../utils/utils'
 
 const OrderOverview = () => {
   const [isExpanded, setIsExpanded] = useState(false)
-
-  // const [quantity, setQuantity] = useState(3)
+  // const [quantity, setQuantity] = useState(1)
+  const current = '$'
   const quantity = 3 // TEMP
 
-  // const subtotal = (PRODUCT_PRICE * quantity).toFixed(2)
-  const price = PRODUCT_PRICE.toFixed(2)
+  // const subtotal = PRODUCT_PRICE * quantity
   const subtotal = PRODUCT_PRICE // TEMP
   const total = subtotal
-  const current = '$'
+
+  const formattedPrice = formatCurrency(PRODUCT_PRICE, current)
+  const formattedTotal = formatCurrency(total, current)
+  const formattedSubtotal = formatCurrency(subtotal, current)
 
   return (
     <section className={`${style.orderOverview} ${isExpanded ? style.expanded : ''}`}>
@@ -23,10 +26,7 @@ const OrderOverview = () => {
           <span className={style.title}>Order overview</span>
           <img className={style.arrowIcon} src={arrowDown} alt="arrow" />
         </div>
-        <span className={style.price}>
-          {current}
-          {total}
-        </span>
+        <span className={style.price}>{formattedTotal}</span>
       </button>
       {/* Only mobile expanded / Desktop  */}
       <div className={style.orderExpanded}>
@@ -40,25 +40,16 @@ const OrderOverview = () => {
               {PRODUCT_NAME}
               <span className={style.warranty}> + Warranty</span>
             </div>
-            <span className={style.price}>
-              {current}
-              {price}
-            </span>
+            <span className={style.price}>{formattedPrice}</span>
           </article>
         </div>
         <div className={style.subtotalGroup}>
           <span>Subtotal</span>
-          <span>
-            {current}
-            {subtotal}
-          </span>
+          <span>{formattedSubtotal}</span>
         </div>
         <div className={style.totalGroup}>
           <span>Total</span>
-          <span>
-            {current}
-            {total}
-          </span>
+          <span>{formattedTotal}</span>
         </div>
       </div>
     </section>
