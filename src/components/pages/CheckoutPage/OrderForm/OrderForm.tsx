@@ -17,34 +17,36 @@ const OrderForm = () => {
   return (
     <section className={style.orderForm}>
       <form>
-        <section className={`${style.formSection} ${style.contact}`}>
+        <section className={`${style.formSection} ${style.contactSection}`}>
           <h2>Contact</h2>
           <div>
             <Input type="email" name="email" placeholder="Email Address" />
           </div>
         </section>
 
-        <section className={`${style.formSection} ${style.delivery}`}>
+        <section className={`${style.formSection} ${style.deliverySection}`}>
           <h2>Delivery</h2>
-          <div className={style.fullNameGroup}>
-            <Input type="text" name="first_name" placeholder="First Name" />
-            <Input type="text" name="last_name" placeholder="Last Name" />
-          </div>
+          <div className={style.deliveryInputs}>
+            <div className={style.fullNameGroup}>
+              <Input type="text" name="first_name" placeholder="First Name" />
+              <Input type="text" name="last_name" placeholder="Last Name" />
+            </div>
 
-          <div>
-            <Input type="text" name="address" placeholder="Address" />
-          </div>
+            <div>
+              <Input type="text" name="address" placeholder="Address" />
+            </div>
 
-          <div className={style.locationGroup}>
-            <Input type="text" name="city" placeholder="City" />
-            <Select label="State / Province" name="selectedState" options={states} />
-            <Input type="text" name="zip" placeholder="ZIP / Postal Code" />
-          </div>
+            <div className={style.locationGroup}>
+              <Input type="text" name="city" placeholder="City" />
+              <Select label="State / Province" name="selectedState" options={states} />
+              <Input type="text" name="zip" placeholder="ZIP / Postal Code" />
+            </div>
 
-          <Select label="Country" name="selectedCountry" options={countries} />
+            <Select label="Country" name="selectedCountry" options={countries} />
+          </div>
         </section>
 
-        <section className={`${style.formSection} ${style.payment}`}>
+        <section className={`${style.formSection} ${style.paymentSection}`}>
           <h2>Payment</h2>
           <p className={style.subtitle}>All transactions are secure and encrypted.</p>
           <div className={style.card}>
@@ -65,11 +67,11 @@ const OrderForm = () => {
             </div> */}
               </div>
             </div>
-            <div className={style.cardDetailsGroup}>
+            <div className={style.paymentInputs}>
               <div>
                 <Input type="number" name="card_number" placeholder="Card number" />
               </div>
-              <div>
+              <div className={style.coupleInputs}>
                 <Input type="text" name="expiration" placeholder="Expiration (MM/YY)" />
                 <Input type="number" name="security_code" placeholder="Security code" />
               </div>

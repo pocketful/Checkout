@@ -1,5 +1,7 @@
 .orderForm {
   background-color: $foreground-color;
+  display: flex;
+  flex-direction: column;
 
   @include for(ScreenMD) {
     background-color: initial;
@@ -37,10 +39,10 @@
 
 .formSection {
   background-color: $background-color;
-  padding: 16px $wrapper-pd;
+  padding: 15px $wrapper-pd;
   border-block: 1px solid $gray-3;
 
-  &:not(:last-child) {
+  &:not(:last-of-type) {
     margin-bottom: 16px;
   }
 
@@ -66,7 +68,7 @@
   text-align: center;
   align-items: center;
   background-color: $blue-light;
-  padding: 16px;
+  padding: 15px;
   border: 1px solid $active-color;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -82,6 +84,7 @@
 
     .cardIcon {
       margin-left: 3px;
+      cursor: pointer;
     }
   }
 }
@@ -98,6 +101,42 @@
   }
 }
 
-// .cardDetailsGroup input {
-//   gap: 12px;
-// }
+.deliverySection {
+  .deliveryInputs {
+    display: grid;
+    gap: 12px;
+  }
+}
+
+.paymentSection {
+  .paymentInputs {
+    display: grid;
+    gap: 12px;
+    padding: 12px;
+    background-color: $form-background-color;
+    border: solid $gray-3;
+    border-width: 0 1px 1px;
+
+    .coupleInputs {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  > button {
+    margin-top: 12px;
+  }
+}
+
+@include for(ScreenMD) {
+  .subtitle {
+    margin-bottom: 16px;
+  }
+
+  .paymentSection {
+    > button {
+      margin-top: 16px;
+    }
+  }
+}

@@ -1,17 +1,17 @@
 .input {
   @extend %font-s-regular;
-
+  
   font-family: inherit;
   color: $font-color;
   background-color: $white;
   width: 100%;
-  padding: 16px;
+  padding: 15px;
   border: 1px solid $gray-3;
   border-radius: 6px;
 
   &:focus {
     outline: none;
-    border: 1px solid $active-color;
+    border-color: $active-color;
   }
 
   &::placeholder {
