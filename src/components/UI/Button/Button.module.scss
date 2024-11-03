@@ -1,7 +1,4 @@
 @use 'sass:color';
-@import '/src/styles/colors';
-@import '/src/styles/media-queries';
-@import '/src/styles/typography';
 
 .button {
   @extend %font-secondary-s-bold;
@@ -15,15 +12,15 @@
   text-transform: uppercase;
 
   &.primary {
-    background: $button-primary-color;
+    background-color: $button-primary-color;
     color: $white;
 
     &:hover {
-      background: color.scale($button-primary-color, $lightness: -15%);
+      background-color: color.scale($button-primary-color, $lightness: -15%);
     }
 
     &:active {
-      background: color.scale($button-primary-color, $lightness: -30%);
+      background-color: color.scale($button-primary-color, $lightness: -30%);
     }
   }
 

@@ -1,9 +1,21 @@
 $wrapper-pd: 16px;
 $wrapper-pd-md: 38px;
-$container-max-w: 1116px;
-$screen-md: 768px;
+$container-max-w: 1072px;
 
-// screen sizes
-// $screen-sm: 640px;
-// $screen-lg: 1024px;
-// $screen-xl: 1280px;
+// breakpoints
+$screen-sm: 640px;
+$screen-md: 768px;
+$screen-lg: 1024px;
+$screen-xl: 1280px;
+
+@mixin for($breakpoint) {
+  @if $breakpoint == ScreenSM {
+    @media (min-width: $screen-sm) {
+      @content;
+    }
+  } @else if $breakpoint == ScreenMD {
+    @media (min-width: $screen-md) {
+      @content;
+    }
+  }
+}

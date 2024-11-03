@@ -1,6 +1,3 @@
-@import '/src/styles/colors';
-@import '/src/styles/typography';
-
 .selectGroup {
   position: relative;
   width: 100%;
@@ -18,12 +15,12 @@
 }
 
 .select {
-  @extend  %font-s-regular;
+  @extend %font-s-regular;
 
   cursor: pointer;
   font-family: inherit;
   color: $font-color;
-  background: $white;
+  background-color: $white;
   background-image: url('/src/assets/UI/arrow-down.svg');
   background-repeat: no-repeat;
   background-position: right 16px center;

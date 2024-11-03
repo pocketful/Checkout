@@ -1,11 +1,7 @@
-@import '/src/styles/colors';
-@import '/src/styles/media-queries';
-@import '/src/styles/sizes';
-
 .container {
   margin: 0 auto;
   max-width: $container-max-w;
-  
+
   // padding-left: $wrapper-pd;
   // padding-right: $wrapper-pd;
 
