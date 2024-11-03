@@ -3,6 +3,7 @@ import Header from '../../Header/Header'
 import Summary from './Summary/Summary'
 import OrderForm from './OrderForm/OrderForm'
 import Benefits from './Benefits/Benefits'
+import { product } from '../../../data/product'
 
 function CheckoutPage() {
   return (
@@ -10,7 +11,7 @@ function CheckoutPage() {
       <Header />
       <main className={style.container}>
         <div className={style.sectionSummary}>
-          <Summary />
+          <Summary product={product} />
         </div>
         <div className={style.sectionOrderForm}>
           <OrderForm />

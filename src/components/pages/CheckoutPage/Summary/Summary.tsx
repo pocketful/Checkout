@@ -1,22 +1,23 @@
 import { useState } from 'react'
 import style from './Summary.module.scss'
 import arrowDown from '../../../../assets/UI/arrow-down.svg'
-import { PRODUCT_IMAGE, PRODUCT_ALT, PRODUCT_NAME, PRODUCT_PRICE } from '../../../../data/product'
-import { formatCurrency } from '../../../../utils/utils'
+import { formatCurrency } from '../../../../utils/formatCurrency'
+import { Product } from '../../../../data/product'
 
-const Summary = () => {
+interface SummaryProps {
+  product: Product
+}
+
+const Summary = ({ product }: SummaryProps) => {
   const [isExpanded, setIsExpanded] = useState(false)
-  // const [quantity, setQuantity] = useState(1)
-  const current = '$'
-  const quantity = 3 // TEMP
 
-  // const subtotal = PRODUCT_PRICE * quantity
-  const subtotal = PRODUCT_PRICE // TEMP
+  const subtotal = product.price * product.quantity
+  // const subtotal = PRODUCT_PRICE // TEMP
   const total = subtotal
 
-  const formattedPrice = formatCurrency(PRODUCT_PRICE, current)
-  const formattedTotal = formatCurrency(total, current)
-  const formattedSubtotal = formatCurrency(subtotal, current)
+  const formattedPrice = formatCurrency(product.price, product.currency)
+  const formattedTotal = formatCurrency(total, product.currency)
+  const formattedSubtotal = formatCurrency(subtotal, product.currency)
 
   return (
     <section className={`${style.summary} ${isExpanded ? style.expanded : ''}`}>
@@ -33,11 +34,11 @@ const Summary = () => {
         <div className={style.productGroup}>
           <article className={style.productCard}>
             <div className={style.productImgWrapper}>
-              <img src={PRODUCT_IMAGE} alt={PRODUCT_ALT}></img>
-              <span className={style.productAmount}>{quantity}</span>
+              <img src={product.image} alt={product.alt}></img>
+              <span className={style.productAmount}>{product.quantity}</span>
             </div>
             <div className={style.productName}>
-              {PRODUCT_NAME}
+              {product.name}
               <span className={style.warranty}> + Warranty</span>
             </div>
             <span className={style.price}>{formattedPrice}</span>
