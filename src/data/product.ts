@@ -1,21 +1,28 @@
 import productImage from '@/assets/img/product-test.png'
+import productImageWithText from '@/assets/img/product-test-text.png'
 
 export interface Product {
-  image: string
-  alt: string
-  name: string
+  title: string
   price: number
-  currency: string
   quantity: number
+  currency: string
+  image: {
+    small: string
+    medium: string
+    alt: string
+  }
 }
 
 export const product: Product = {
-  image: productImage,
-  alt: 'product image',
-  name: 'LogoIpsum IPL',
+  title: 'LogoIpsum IPL',
   price: 299.97,
-  currency: '$',
   quantity: 3,
+  currency: '$',
+  image: {
+    small: productImage,
+    medium: productImageWithText,
+    alt: 'product image',
+  },
 }
 
 export const updateProduct = (newDetails: Partial<Product>) => {

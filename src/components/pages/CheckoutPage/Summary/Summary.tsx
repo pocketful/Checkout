@@ -1,23 +1,23 @@
 import { useState } from 'react'
 import arrowDown from '@/assets/UI/arrow-down.svg'
-import { formatCurrency } from '@/utils/formatCurrency'
 import { Product } from '@/data/product'
 import style from './Summary.module.scss'
+import { useProductPricing } from '@/hooks/useProductPricing'
 
 interface SummaryProps {
   product: Product
 }
 
 const Summary = ({ product }: SummaryProps) => {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const { title, price, quantity, currency, image } = product
 
-  const subtotal = product.price * product.quantity
-  // const subtotal = PRODUCT_PRICE // TEMP
-  const total = subtotal
+  const [isExpanded, setIsExpanded] = useState<boolean>(false)
 
-  const formattedPrice = formatCurrency(product.price, product.currency)
-  const formattedTotal = formatCurrency(total, product.currency)
-  const formattedSubtotal = formatCurrency(subtotal, product.currency)
+  const { formattedPrice, formattedSubtotal, formattedTotal } = useProductPricing({
+    price,
+    quantity,
+    currency,
+  })
 
   return (
     <section className={`${style.summary} ${isExpanded ? style.expanded : ''}`}>
@@ -34,13 +34,10 @@ const Summary = ({ product }: SummaryProps) => {
         <div className={style.productGroup}>
           <article className={style.productCard}>
             <div className={style.productImgWrapper}>
-              <img src={product.image} alt={product.alt}></img>
-              <span className={style.productAmount}>{product.quantity}</span>
+              <img src={image.small} alt={image.alt}></img>
+              <span className={style.productAmount}>{quantity}</span>
             </div>
-            <div className={style.productName}>
-              {product.name}
-              <span className={style.warranty}> + Warranty</span>
-            </div>
+            <div className={style.productName}>{title} + Warranty</div>
             <span className={style.price}>{formattedPrice}</span>
           </article>
         </div>
