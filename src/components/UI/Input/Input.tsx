@@ -1,5 +1,5 @@
-import style from './Input.module.scss'
 import { forwardRef, InputHTMLAttributes } from 'react'
+import style from './Input.module.scss'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string

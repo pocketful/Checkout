@@ -1,8 +1,8 @@
-import style from './Benefits.module.scss'
-import cachback from '../../../../assets/benefits/cashback.svg'
-import customerService from '../../../../assets/benefits/customer-service.svg'
-import rating from '../../../../assets/benefits/rating.svg'
+import cachback from '@/assets/benefits/cashback.svg'
+import customerService from '@/assets/benefits/customer-service.svg'
+import rating from '@/assets/benefits/rating.svg'
 import BenefitItem from './BenefitItem/BenefitItem'
+import style from './Benefits.module.scss'
 
 const Benefits = () => {
   return (

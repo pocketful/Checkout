@@ -1,6 +1,6 @@
+import logo from '@/assets/UI/logoipsum-logo.svg'
+import shoppingBag from '@/assets/UI/shopping-bag.svg'
 import style from './Header.module.scss'
-import logo from '../../assets/UI/logoipsum-logo.svg'
-import shoppingBag from '../../assets/UI/shopping-bag.svg'
 
 function Header() {
   return (

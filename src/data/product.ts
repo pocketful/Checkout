@@ -1,4 +1,4 @@
-import productImage from '../assets/img/product-test.png'
+import productImage from '@/assets/img/product-test.png'
 
 export interface Product {
   image: string

@@ -8,6 +8,11 @@ module.exports = {
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true,
+        project: './tsconfig.json',
+      },
+      node: {
+        paths: ['src'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
       },
     },
   },
@@ -30,7 +35,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    project: './tsconfig.json',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
     tsconfigRootDir: __dirname,
   },
   plugins: ['react-refresh', 'import'],

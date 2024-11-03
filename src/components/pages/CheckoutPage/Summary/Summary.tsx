@@ -1,8 +1,8 @@
 import { useState } from 'react'
+import arrowDown from '@/assets/UI/arrow-down.svg'
+import { formatCurrency } from '@/utils/formatCurrency'
+import { Product } from '@/data/product'
 import style from './Summary.module.scss'
-import arrowDown from '../../../../assets/UI/arrow-down.svg'
-import { formatCurrency } from '../../../../utils/formatCurrency'
-import { Product } from '../../../../data/product'
 
 interface SummaryProps {
   product: Product

@@ -1,5 +1,5 @@
-import style from './Select.module.scss'
 import { SelectHTMLAttributes, forwardRef } from 'react'
+import style from './Select.module.scss'
 
 export interface SelectOption {
   value: string

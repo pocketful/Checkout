@@ -1,9 +1,9 @@
-import style from './CheckoutPage.module.scss'
-import Header from '../../Header/Header'
+import Header from '@/components/Header/Header'
 import Summary from './Summary/Summary'
 import OrderForm from './OrderForm/OrderForm'
 import Benefits from './Benefits/Benefits'
-import { product } from '../../../data/product'
+import { product } from '@/data/product'
+import style from './CheckoutPage.module.scss'
 
 function CheckoutPage() {
   return (

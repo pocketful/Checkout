@@ -1,4 +1,4 @@
-import { SelectOption } from '../components/UI/Select/Select'
+import { SelectOption } from '@/components/UI/Select/Select'
 
 export const states: SelectOption[] = [
   { value: 'AZ', label: 'Arizona' },
