@@ -26,7 +26,7 @@ describe('Select', () => {
   })
 
   it('applies custom class style', () => {
-    renderSelect({ classStyle: 'custom' })
+    renderSelect({ className: 'custom' })
     expect(screen.getByRole('combobox')).toHaveClass('select')
   })
 

@@ -12,7 +12,7 @@ const config: Config = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
-    '\\.(css|scss|png|jpg|webp)$': 'identity-obj-proxy',
+    '\\.(css|scss|jpg|jpeg|png|gif|webp|svg)$': 'identity-obj-proxy',
   },
   testEnvironmentOptions: {
     customExportConditions: [''],

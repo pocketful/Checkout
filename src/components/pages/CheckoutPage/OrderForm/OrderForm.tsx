@@ -32,17 +32,29 @@ const OrderForm = () => {
               <Input type="text" name="last_name" placeholder="Last Name" />
             </div>
 
-            <div>
-              <Input type="text" name="address" placeholder="Address" />
-            </div>
+            <Input type="text" name="address" placeholder="Address" />
 
             <div className={style.locationGroup}>
-              <Input type="text" name="city" placeholder="City" />
-              <Select label="State / Province" name="selectedState" options={states} />
-              <Input type="text" name="zip" placeholder="ZIP / Postal Code" />
+              <Input className={style.cityInput} type="text" name="city" placeholder="City" />
+              <Select
+                className={style.stateInput}
+                label="State / Province"
+                name="selectedState"
+                options={states}
+              />
+              <Input
+                className={style.zipInput}
+                type="text"
+                name="zip"
+                placeholder="ZIP / Postal Code"
+              />
+              <Select
+                className={style.countryInput}
+                label="Country"
+                name="selectedCountry"
+                options={countries}
+              />
             </div>
-
-            <Select label="Country" name="selectedCountry" options={countries} />
           </div>
         </section>
 

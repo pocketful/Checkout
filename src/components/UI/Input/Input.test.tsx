@@ -14,8 +14,10 @@ describe('Input', () => {
   })
 
   it('applies custom class name', () => {
-    render(<Input classStyle="custom" />)
-    expect(screen.getByRole('textbox')).toHaveClass('custom')
+    render(<Input className="custom" />)
+
+    expect(screen.getByTestId('input-wrapper')).toHaveClass('inputWrapper', 'custom')
+    expect(screen.getByRole('textbox')).toHaveClass('input')
   })
 
   it('forwards ref correctly', () => {

@@ -3,17 +3,14 @@ import style from './Input.module.scss'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string
-  classStyle?: string
+  className?: string
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(({ classStyle, type, ...props }, ref) => {
+const Input = forwardRef<HTMLInputElement, InputProps>(({ className, type, ...props }, ref) => {
   return (
-    <input
-      type={type}
-      className={`${style.input} ${classStyle ? style[classStyle] : ''}`}
-      ref={ref}
-      {...props}
-    />
+    <div className={`${style.inputWrapper} ${className ?? ''}`} data-testid="input-wrapper">
+      <input type={type} className={style.input} ref={ref} {...props} />
+    </div>
   )
 })
 
