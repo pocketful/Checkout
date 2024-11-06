@@ -16,7 +16,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           {...props}
         />
-        {error && <span className={style.errText}>{error}</span>}
+        {error && <p className={style.errText}>{error}</p>}
       </div>
     )
   },

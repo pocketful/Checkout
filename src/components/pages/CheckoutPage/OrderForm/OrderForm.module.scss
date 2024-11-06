@@ -88,7 +88,10 @@
 
     .cardIcon {
       margin-left: 3px;
-      cursor: pointer;
+
+      &:last-of-type {
+        cursor: pointer;
+      }
     }
   }
 }

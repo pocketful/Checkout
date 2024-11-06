@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as Yup from 'yup'
+import { validationSchema } from '@/utils/validation'
 import amex from '@/assets/cards/card-amex.svg'
 import visa from '@/assets/cards/card-visa.svg'
 import mastercard from '@/assets/cards/card-mastercard.svg'
@@ -19,24 +19,7 @@ import { useState } from 'react'
 import { useProductPricing } from '@/hooks/useProductPricing'
 import { Product } from '@/data/product'
 import { useOrderContext } from '@/context/OrderContext'
-
-const validationSchema = Yup.object({
-  first_name: Yup.string()
-    .min(2, 'First name must be at least 2 characters')
-    .max(50, 'First name must not exceed 50 characters')
-    .required('First name is required'),
-  last_name: Yup.string()
-    .min(2, 'Last name must be at least 2 characters')
-    .max(50, 'Last name must not exceed 50 characters')
-    .required('Last name is required'),
-  selectedCountry: Yup.string().required('Please select a country'),
-})
-
-type FormValues = {
-  first_name: string
-  last_name: string
-  selectedCountry: string
-}
+import { FormValues } from '@/types/orderForm'
 
 // simulate async
 // const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -44,8 +27,10 @@ interface OrderFormProps {
   product: Product
 }
 
+type PaymentMethod = 'Credit Card'
+
 const OrderForm = ({ product }: OrderFormProps) => {
-  const [paymentMethod, setPaymentMethod] = useState<string>('Credit Card')
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('Credit Card')
 
   const { warranty } = useOrderContext()
 
@@ -59,14 +44,24 @@ const OrderForm = ({ product }: OrderFormProps) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormValues>({
     resolver: yupResolver(validationSchema),
     // mode: 'onTouched'
     mode: 'onChange',
     defaultValues: {
+      email: '',
       first_name: '',
       last_name: '',
+      address: '',
+      city: '',
+      selectedState: '',
+      zip: '',
       selectedCountry: '',
+      card_number: '',
+      expiration_date: '',
+      security_code: '',
+      account_name: '',
     },
   })
 
@@ -90,6 +85,7 @@ const OrderForm = ({ product }: OrderFormProps) => {
       console.log('orderData: ', orderData)
 
       localStorage.setItem('orderData', JSON.stringify(orderData))
+      reset()
     } catch (error) {
       console.error('Form submission error:', error)
     }
@@ -97,53 +93,72 @@ const OrderForm = ({ product }: OrderFormProps) => {
 
   return (
     <section className={style.orderForm}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <section className={`${style.formSection} ${style.contactSection}`}>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        {/* Contact Section */}
+        <section className={style.formSection}>
           <h2>Contact</h2>
           <div>
-            <Input type="email" name="email" placeholder="Email Address" />
+            <Input
+              {...register('email')}
+              type="email"
+              placeholder="Email Address"
+              error={errors.email?.message}
+            />
           </div>
         </section>
 
+        {/* Delivery Section */}
         <section className={`${style.formSection} ${style.deliverySection}`}>
           <h2>Delivery</h2>
           <div className={style.deliveryInputs}>
             <div className={style.fullNameGroup}>
               <Input
-                type="text"
                 {...register('first_name')}
+                type="text"
                 placeholder="First Name"
                 error={errors.first_name?.message}
               />
               <Input
-                type="text"
                 {...register('last_name')}
+                type="text"
                 placeholder="Last Name"
                 error={errors.last_name?.message}
               />
             </div>
-
-            <Input type="text" name="address" placeholder="Address" />
-
+            <Input
+              {...register('address')}
+              type="text"
+              placeholder="Address"
+              error={errors.address?.message}
+            />
             <div className={style.locationGroup}>
-              <Input className={style.cityInput} type="text" name="city" placeholder="City" />
+              <Input
+                className={style.cityInput}
+                {...register('city')}
+                type="text"
+                placeholder="City"
+                error={errors.city?.message}
+              />
               <Select
                 className={style.stateInput}
+                {...register('selectedState')}
                 label="State / Province"
-                name="selectedState"
                 options={states}
+                error={errors.selectedState?.message}
               />
               <Input
                 className={style.zipInput}
+                {...register('zip')}
                 type="text"
-                name="zip"
                 placeholder="ZIP / Postal Code"
+                minLength={3}
+                maxLength={10}
+                error={errors.zip?.message}
               />
               <Select
-                {...register('selectedCountry')}
                 className={style.countryInput}
+                {...register('selectedCountry')}
                 label="Country"
-                name="selectedCountry"
                 options={countries}
                 error={errors.selectedCountry?.message}
               />
@@ -151,13 +166,18 @@ const OrderForm = ({ product }: OrderFormProps) => {
           </div>
         </section>
 
+        {/* Payment Section */}
         <section className={`${style.formSection} ${style.paymentSection}`}>
           <h2>Payment</h2>
           <p className={style.subtitle}>All transactions are secure and encrypted.</p>
           <div className={style.card}>
             <div className={style.cardHeading}>
               <div className={style.selectCardWrapper}>
-                <RadioButton isSelected={true} />
+                <RadioButton
+                  onClick={() => setPaymentMethod('Credit Card')}
+                  isSelected={paymentMethod === 'Credit Card'}
+                  aria-label="Pay with Credit Card"
+                />
                 <span>{paymentMethod}</span>
               </div>
               <div className={style.cardIcons}>
@@ -166,22 +186,41 @@ const OrderForm = ({ product }: OrderFormProps) => {
                 <img className={style.cardIcon} src={amex} alt="amex card" />
                 <img className={style.cardIcon} src={diners} alt="diners card " />
                 <img className={style.cardIcon} src={discover} alt="discover card " />
-                {/* <button>+4</button type="button" className="placeholder"> */}
-                {/* <div className="background picture/button">
-              <span className="cards-total">+4</span>
-            </div> */}
               </div>
             </div>
             <div className={style.paymentInputs}>
               <div>
-                <Input type="number" name="card_number" placeholder="Card number" />
+                <Input
+                  {...register('card_number')}
+                  type="tel"
+                  placeholder="Card number"
+                  maxLength={19}
+                  error={errors.card_number?.message}
+                />
               </div>
               <div className={style.coupleInputs}>
-                <Input type="text" name="expiration" placeholder="Expiration (MM/YY)" />
-                <Input type="number" name="security_code" placeholder="Security code" />
+                <Input
+                  {...register('expiration_date')}
+                  type="text"
+                  placeholder="Expiration (MM/YY)"
+                  maxLength={5}
+                  error={errors.expiration_date?.message}
+                />
+                <Input
+                  {...register('security_code')}
+                  type="tel"
+                  placeholder="Security code"
+                  maxLength={4}
+                  error={errors.security_code?.message}
+                />
               </div>
               <div>
-                <Input type="text" name="name_on_card" placeholder="Name on card" />
+                <Input
+                  {...register('account_name')}
+                  type="text"
+                  placeholder="Name on card"
+                  error={errors.account_name?.message}
+                />
               </div>
             </div>
           </div>

@@ -25,7 +25,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             </option>
           ))}
         </select>
-        {error && <span className={style.errText}>{error}</span>}
+        {error && <p className={style.errText}>{error}</p>}
       </div>
     )
   },
