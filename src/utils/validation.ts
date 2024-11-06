@@ -59,4 +59,8 @@ export const validationSchema = Yup.object({
     .min(2, 'Name must be at least 2 characters')
     .max(50, 'Name must not exceed 50 characters')
     .required('Name on card is required'),
+
+  paymentMethod: Yup.string()
+    .oneOf(['Credit Card'], 'Invalid payment method')
+    .required('Payment method is required'),
 })

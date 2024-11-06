@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { validationSchema } from '@/utils/validation'
@@ -10,12 +9,11 @@ import discover from '@/assets/cards/card-discover.svg'
 import lock from '@/assets/UI/lock.svg'
 import Button from '@/components/UI/Button/Button'
 import Input from '@/components/UI/Input/Input'
-import RadioButton from '@/components/UI/RadioButton/RadioButton'
+import RadioInput from '@/components/UI/RadioInput/RadioInput'
 import Select from '@/components/UI/Select/Select'
 import { states } from '@/data/states'
 import { countries } from '@/data/countries'
 import style from './OrderForm.module.scss'
-import { useState } from 'react'
 import { useProductPricing } from '@/hooks/useProductPricing'
 import { Product } from '@/data/product'
 import { useOrderContext } from '@/context/OrderContext'
@@ -27,11 +25,7 @@ interface OrderFormProps {
   product: Product
 }
 
-type PaymentMethod = 'Credit Card'
-
 const OrderForm = ({ product }: OrderFormProps) => {
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('Credit Card')
-
   const { warranty } = useOrderContext()
 
   const { formattedPrice, formattedSubtotal, formattedTotal } = useProductPricing({
@@ -42,6 +36,7 @@ const OrderForm = ({ product }: OrderFormProps) => {
 
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
     reset,
@@ -62,8 +57,12 @@ const OrderForm = ({ product }: OrderFormProps) => {
       expiration_date: '',
       security_code: '',
       account_name: '',
+      paymentMethod: 'Credit Card',
     },
   })
+
+  const paymentMethod = watch('paymentMethod')
+  console.log(paymentMethod)
 
   console.log(' errors: ', errors)
   console.log('orderData from localStorage', localStorage.getItem('orderData'))
@@ -75,15 +74,12 @@ const OrderForm = ({ product }: OrderFormProps) => {
       const orderData = {
         ...data,
         warranty,
-        paymentMethod,
         product,
         formattedPrice,
         formattedSubtotal,
         formattedTotal,
       }
-
       console.log('orderData: ', orderData)
-
       localStorage.setItem('orderData', JSON.stringify(orderData))
       reset()
     } catch (error) {
@@ -173,9 +169,9 @@ const OrderForm = ({ product }: OrderFormProps) => {
           <div className={style.card}>
             <div className={style.cardHeading}>
               <div className={style.selectCardWrapper}>
-                <RadioButton
-                  onClick={() => setPaymentMethod('Credit Card')}
-                  isSelected={paymentMethod === 'Credit Card'}
+                <RadioInput
+                  {...register('paymentMethod')}
+                  value="Credit Card"
                   aria-label="Pay with Credit Card"
                 />
                 <span>{paymentMethod}</span>

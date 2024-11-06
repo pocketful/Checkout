@@ -1,3 +1,5 @@
+export type PaymentMethod = 'Credit Card'
+
 export type FormValues = {
   email: string
   first_name: string
@@ -11,4 +13,5 @@ export type FormValues = {
   expiration_date: string
   security_code: string
   account_name: string
+  paymentMethod: PaymentMethod
 }

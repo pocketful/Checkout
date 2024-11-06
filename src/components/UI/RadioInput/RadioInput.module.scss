@@ -1,0 +1,27 @@
+.radio {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 2px solid $gray-4;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 16px;
+
+  &:has(input:checked) {
+    border-color: $active-color;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      background-color: $active-color;
+      border-radius: 50%;
+    }
+  }
+}
