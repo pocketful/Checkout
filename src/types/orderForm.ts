@@ -6,12 +6,12 @@ export type FormValues = {
   last_name: string
   address: string
   city: string
-  selectedState: string
+  state: string
   zip: string
-  selectedCountry: string
+  country: string
   card_number: string
   expiration_date: string
   security_code: string
   account_name: string
-  paymentMethod: PaymentMethod
+  payment_method: PaymentMethod
 }

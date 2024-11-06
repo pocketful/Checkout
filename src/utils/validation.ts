@@ -30,14 +30,14 @@ export const validationSchema = Yup.object({
     .max(50, 'City must not exceed 50 characters')
     .required('City is required'),
 
-  selectedState: Yup.string().required('Please select a state'),
+  state: Yup.string().required('Please select a state'),
 
   zip: Yup.string()
     .min(3, 'ZIP / Postal code must be at least 3 characters')
     .max(10, 'ZIP / Postal code must be at least 3 characters')
     .required('Zip code is required'),
 
-  selectedCountry: Yup.string().required('Please select a country'),
+  country: Yup.string().required('Please select a country'),
 
   // Payment section
   card_number: Yup.string()
@@ -60,7 +60,7 @@ export const validationSchema = Yup.object({
     .max(50, 'Name must not exceed 50 characters')
     .required('Name on card is required'),
 
-  paymentMethod: Yup.string()
+  payment_method: Yup.string()
     .oneOf(['Credit Card'], 'Invalid payment method')
     .required('Payment method is required'),
 })

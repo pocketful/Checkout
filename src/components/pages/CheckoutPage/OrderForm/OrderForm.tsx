@@ -50,18 +50,18 @@ const OrderForm = ({ product }: OrderFormProps) => {
       last_name: '',
       address: '',
       city: '',
-      selectedState: '',
+      state: '',
       zip: '',
-      selectedCountry: '',
+      country: '',
       card_number: '',
       expiration_date: '',
       security_code: '',
       account_name: '',
-      paymentMethod: 'Credit Card',
+      payment_method: 'Credit Card',
     },
   })
 
-  const paymentMethod = watch('paymentMethod')
+  const paymentMethod = watch('payment_method')
   console.log(paymentMethod)
 
   console.log(' errors: ', errors)
@@ -137,10 +137,10 @@ const OrderForm = ({ product }: OrderFormProps) => {
               />
               <Select
                 className={style.stateInput}
-                {...register('selectedState')}
+                {...register('state')}
                 label="State / Province"
                 options={states}
-                error={errors.selectedState?.message}
+                error={errors.state?.message}
               />
               <Input
                 className={style.zipInput}
@@ -153,10 +153,10 @@ const OrderForm = ({ product }: OrderFormProps) => {
               />
               <Select
                 className={style.countryInput}
-                {...register('selectedCountry')}
+                {...register('country')}
                 label="Country"
                 options={countries}
-                error={errors.selectedCountry?.message}
+                error={errors.country?.message}
               />
             </div>
           </div>
@@ -170,7 +170,7 @@ const OrderForm = ({ product }: OrderFormProps) => {
             <div className={style.cardHeading}>
               <div className={style.selectCardWrapper}>
                 <RadioInput
-                  {...register('paymentMethod')}
+                  {...register('payment_method')}
                   value="Credit Card"
                   aria-label="Pay with Credit Card"
                 />
