@@ -41,8 +41,7 @@ export const validationSchema = Yup.object({
 
   // Payment section
   card_number: Yup.string()
-    .min(13, 'Invalid card number')
-    .max(19, 'Invalid card number')
+    .matches(/^\d{4}\s\d{4}\s\d{4}\s\d{4}$/, 'Invalid card number format')
     .required('Card number is required'),
 
   expiration_date: Yup.string()

@@ -18,6 +18,8 @@ import { useProductPricing } from '@/hooks/useProductPricing'
 import { Product } from '@/data/product'
 import { useOrderContext } from '@/context/OrderContext'
 import { FormValues } from '@/types/orderForm'
+import { useEffect } from 'react'
+import { formatCardNumber } from '@/utils/formatCardNumber'
 
 // simulate async
 // const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -37,6 +39,7 @@ const OrderForm = ({ product }: OrderFormProps) => {
   const {
     register,
     watch,
+    setValue,
     handleSubmit,
     formState: { errors },
     reset,
@@ -62,10 +65,21 @@ const OrderForm = ({ product }: OrderFormProps) => {
   })
 
   const paymentMethod = watch('payment_method')
-  console.log(paymentMethod)
+
+  const cardNumber = watch('card_number')
+  console.log(cardNumber)
+
+  useEffect(() => {
+    if (cardNumber) {
+      const formattedCardNumber = formatCardNumber(cardNumber)
+      if (formattedCardNumber !== cardNumber) {
+        setValue('card_number', formattedCardNumber)
+      }
+    }
+  }, [cardNumber, setValue])
 
   console.log(' errors: ', errors)
-  console.log('orderData from localStorage', localStorage.getItem('orderData'))
+  // console.log('orderData from localStorage', localStorage.getItem('orderData'))
 
   const onSubmit = (data: FormValues) => {
     // const onSubmit = async (data: FormValues) => {
