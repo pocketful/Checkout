@@ -1,4 +1,4 @@
-import { formatCardNumber } from './formatCardNumber'
+import { formatCardNumber } from '../formatPayment'
 
 describe('formatCardNumber', () => {
   it('handles empty or invalid inputs', () => {
@@ -28,5 +28,10 @@ describe('formatCardNumber', () => {
 
   it('limits to 16 digits', () => {
     expect(formatCardNumber('12345678901234567890')).toBe('1234 5678 9012 3456')
+  })
+
+  it('maintains correct format for Yup validation', () => {
+    const result = formatCardNumber('1234567812345678')
+    expect(result).toMatch(/^\d{4}\s\d{4}\s\d{4}\s\d{4}$/)
   })
 })

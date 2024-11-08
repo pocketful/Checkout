@@ -5,8 +5,10 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
   css: {
+    devSourcemap: true,
     preprocessorOptions: {
       scss: {
+        quietDeps: true,
         additionalData: `
           @use "src/styles/colors" as *;
           @use "src/styles/typography" as *;

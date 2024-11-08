@@ -45,8 +45,7 @@ export const validationSchema = Yup.object({
     .required('Card number is required'),
 
   expiration_date: Yup.string()
-    .min(4, 'Invalid expiration date')
-    .max(5, 'Invalid expiration date')
+    .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, 'Invalid expiration date MM/YY')
     .required('Expiration date is required'),
 
   security_code: Yup.string()

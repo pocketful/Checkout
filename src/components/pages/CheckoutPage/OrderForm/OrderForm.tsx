@@ -19,7 +19,7 @@ import { useProductPricing } from '@/hooks/useProductPricing'
 import { Product } from '@/data/product'
 import { useOrderContext } from '@/context/OrderContext'
 import { FormValues } from '@/types/orderForm'
-import { formatCardNumber } from '@/utils/formatCardNumber'
+import { formatCardNumber, formatExpirationDate } from '@/utils/formatPayment/formatPayment'
 
 // simulate async
 // const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -28,7 +28,7 @@ interface OrderFormProps {
 }
 
 const OrderForm = ({ product }: OrderFormProps) => {
-  const [isFocused, setIsFocused] = useState(false)
+  const [focusedField, setFocusedField] = useState<string | null>(null)
 
   const { warranty } = useOrderContext()
 
@@ -202,28 +202,44 @@ const OrderForm = ({ product }: OrderFormProps) => {
                       type="tel"
                       placeholder="Card number"
                       maxLength={19}
-                      onFocus={() => setIsFocused(true)}
+                      onFocus={() => setFocusedField('card_number')}
                       onBlur={() => {
-                        setIsFocused(false)
+                        setFocusedField(null)
                         field.onBlur()
                       }}
                       onChange={(e) => {
                         const formatted = formatCardNumber(e.target.value)
                         field.onChange(formatted)
                       }}
-                      error={!isFocused ? error?.message : undefined}
+                      error={focusedField !== 'card_number' ? error?.message : undefined}
                     />
                   )}
                 />
               </div>
               <div className={style.coupleInputs}>
-                <Input
-                  {...register('expiration_date')}
-                  type="text"
-                  placeholder="Expiration (MM/YY)"
-                  maxLength={5}
-                  error={errors.expiration_date?.message}
+                <Controller
+                  name="expiration_date"
+                  control={control}
+                  render={({ field, fieldState: { error } }) => (
+                    <Input
+                      {...field}
+                      type="tel"
+                      placeholder="MM/YY"
+                      maxLength={5}
+                      onFocus={() => setFocusedField('expiration_date')}
+                      onBlur={() => {
+                        setFocusedField(null)
+                        field.onBlur()
+                      }}
+                      onChange={(e) => {
+                        const formatted = formatExpirationDate(e.target.value)
+                        field.onChange(formatted)
+                      }}
+                      error={focusedField !== 'expiration_date' ? error?.message : undefined}
+                    />
+                  )}
                 />
+
                 <Input
                   {...register('security_code')}
                   type="tel"
