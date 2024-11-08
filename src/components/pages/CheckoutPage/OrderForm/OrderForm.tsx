@@ -1,4 +1,5 @@
-import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { validationSchema } from '@/utils/validation'
 import amex from '@/assets/cards/card-amex.svg'
@@ -18,7 +19,6 @@ import { useProductPricing } from '@/hooks/useProductPricing'
 import { Product } from '@/data/product'
 import { useOrderContext } from '@/context/OrderContext'
 import { FormValues } from '@/types/orderForm'
-import { useEffect } from 'react'
 import { formatCardNumber } from '@/utils/formatCardNumber'
 
 // simulate async
@@ -28,6 +28,8 @@ interface OrderFormProps {
 }
 
 const OrderForm = ({ product }: OrderFormProps) => {
+  const [isFocused, setIsFocused] = useState(false)
+
   const { warranty } = useOrderContext()
 
   const { formattedPrice, formattedSubtotal, formattedTotal } = useProductPricing({
@@ -39,14 +41,17 @@ const OrderForm = ({ product }: OrderFormProps) => {
   const {
     register,
     watch,
-    setValue,
+    control,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<FormValues>({
     resolver: yupResolver(validationSchema),
-    // mode: 'onTouched'
     mode: 'onChange',
+    // mode: 'onTouched',
+    // mode: 'onBlur',
+    // reValidateMode: 'onBlur',
+
     defaultValues: {
       email: '',
       first_name: '',
@@ -65,18 +70,6 @@ const OrderForm = ({ product }: OrderFormProps) => {
   })
 
   const paymentMethod = watch('payment_method')
-
-  const cardNumber = watch('card_number')
-  console.log(cardNumber)
-
-  useEffect(() => {
-    if (cardNumber) {
-      const formattedCardNumber = formatCardNumber(cardNumber)
-      if (formattedCardNumber !== cardNumber) {
-        setValue('card_number', formattedCardNumber)
-      }
-    }
-  }, [cardNumber, setValue])
 
   console.log(' errors: ', errors)
   // console.log('orderData from localStorage', localStorage.getItem('orderData'))
@@ -200,12 +193,27 @@ const OrderForm = ({ product }: OrderFormProps) => {
             </div>
             <div className={style.paymentInputs}>
               <div>
-                <Input
-                  {...register('card_number')}
-                  type="tel"
-                  placeholder="Card number"
-                  maxLength={19}
-                  error={errors.card_number?.message}
+                <Controller
+                  name="card_number"
+                  control={control}
+                  render={({ field, fieldState: { error } }) => (
+                    <Input
+                      {...field}
+                      type="tel"
+                      placeholder="Card number"
+                      maxLength={19}
+                      onFocus={() => setIsFocused(true)}
+                      onBlur={() => {
+                        setIsFocused(false)
+                        field.onBlur()
+                      }}
+                      onChange={(e) => {
+                        const formatted = formatCardNumber(e.target.value)
+                        field.onChange(formatted)
+                      }}
+                      error={!isFocused ? error?.message : undefined}
+                    />
+                  )}
                 />
               </div>
               <div className={style.coupleInputs}>
