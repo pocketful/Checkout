@@ -20,3 +20,10 @@ export const formatSecurityCode = (value: string): string => {
   const onlyDigits = value.replace(/\D/g, '').slice(0, 4)
   return onlyDigits
 }
+
+export const formatAccountName = (value: string): string => {
+  if (!value) return ''
+  const onlyLettersSpaces = value.replace(/[^a-zA-Z\s]/g, '')
+  const onlyLettersAndSingleSpaces = onlyLettersSpaces.replace(/\s+/g, ' ')
+  return onlyLettersAndSingleSpaces.slice(0, 50)
+}

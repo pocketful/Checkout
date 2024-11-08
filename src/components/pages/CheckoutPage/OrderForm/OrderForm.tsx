@@ -23,6 +23,7 @@ import {
   formatCardNumber,
   formatExpirationDate,
   formatSecurityCode,
+  formatAccountName,
 } from '@/utils/formatPayment/formatPayment'
 
 // simulate async
@@ -267,11 +268,27 @@ const OrderForm = ({ product }: OrderFormProps) => {
                 />
               </div>
               <div>
-                <Input
-                  {...register('account_name')}
-                  type="text"
-                  placeholder="Name on card"
-                  error={errors.account_name?.message}
+                <Controller
+                  name="account_name"
+                  control={control}
+                  render={({ field, fieldState: { error } }) => (
+                    <Input
+                      {...field}
+                      type="text"
+                      placeholder="Name on card"
+                      onFocus={() => setFocusedField('account_name')}
+                      onBlur={() => {
+                        setFocusedField(null)
+                        field.onChange(field.value.trim())
+                        field.onBlur()
+                      }}
+                      onChange={(e) => {
+                        const formatted = formatAccountName(e.target.value)
+                        field.onChange(formatted)
+                      }}
+                      error={focusedField !== 'account_name' ? error?.message : undefined}
+                    />
+                  )}
                 />
               </div>
             </div>
