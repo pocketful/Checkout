@@ -49,8 +49,7 @@ export const validationSchema = Yup.object({
     .required('Expiration date is required'),
 
   security_code: Yup.string()
-    .min(3, 'Invalid security code')
-    .max(4, 'Invalid security code')
+    .matches(/^\d{3,4}$/, 'Security code must be 3 or 4 digits')
     .required('Security code is required'),
 
   account_name: Yup.string()

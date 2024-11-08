@@ -14,3 +14,9 @@ export const formatExpirationDate = (value: string): string => {
   }
   return onlyDigits
 }
+
+export const formatSecurityCode = (value: string): string => {
+  if (!value) return ''
+  const onlyDigits = value.replace(/\D/g, '').slice(0, 4)
+  return onlyDigits
+}

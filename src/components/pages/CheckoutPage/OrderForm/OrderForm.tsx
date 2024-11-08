@@ -19,7 +19,11 @@ import { useProductPricing } from '@/hooks/useProductPricing'
 import { Product } from '@/data/product'
 import { useOrderContext } from '@/context/OrderContext'
 import { FormValues } from '@/types/orderForm'
-import { formatCardNumber, formatExpirationDate } from '@/utils/formatPayment/formatPayment'
+import {
+  formatCardNumber,
+  formatExpirationDate,
+  formatSecurityCode,
+} from '@/utils/formatPayment/formatPayment'
 
 // simulate async
 // const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -239,13 +243,27 @@ const OrderForm = ({ product }: OrderFormProps) => {
                     />
                   )}
                 />
-
-                <Input
-                  {...register('security_code')}
-                  type="tel"
-                  placeholder="Security code"
-                  maxLength={4}
-                  error={errors.security_code?.message}
+                <Controller
+                  name="security_code"
+                  control={control}
+                  render={({ field, fieldState: { error } }) => (
+                    <Input
+                      {...field}
+                      type="tel"
+                      placeholder="Security code"
+                      maxLength={4}
+                      onFocus={() => setFocusedField('security_code')}
+                      onBlur={() => {
+                        setFocusedField(null)
+                        field.onBlur()
+                      }}
+                      onChange={(e) => {
+                        const formatted = formatSecurityCode(e.target.value)
+                        field.onChange(formatted)
+                      }}
+                      error={focusedField !== 'security_code' ? error?.message : undefined}
+                    />
+                  )}
                 />
               </div>
               <div>
