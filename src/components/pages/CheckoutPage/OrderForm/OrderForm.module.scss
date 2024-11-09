@@ -13,11 +13,11 @@
     padding-bottom: 12px;
   }
 
-  .formSection:first-of-type h2 {
+  section:first-of-type h2 {
     padding-top: 8px;
   }
 
-  .formSection:last-of-type h2 {
+  section:last-of-type h2 {
     padding-bottom: 8px;
   }
 
@@ -27,31 +27,31 @@
       padding-bottom: 16px;
     }
 
-    .formSection:first-of-type h2 {
+    section:first-of-type h2 {
       padding-top: 0;
     }
 
-    .formSection:last-of-type h2 {
+    section:last-of-type h2 {
       padding-bottom: 8px;
     }
   }
-}
 
-.formSection {
-  background-color: $background-color;
-  padding: 15px $wrapper-pd;
-  border-block: 1px solid $gray-3;
+  section {
+    background-color: $background-color;
+    padding: 15px $wrapper-pd;
+    border-block: 1px solid $gray-3;
 
-  &:not(:last-of-type) {
-    margin-bottom: 16px;
-  }
+    &:not(:last-of-type) {
+      margin-bottom: 16px;
+    }
 
-  @include for(ScreenMD) {
-    border-block: none;
-    margin-bottom: 0;
-    padding-top: 0;
-    padding-left: 0;
-    padding-right: 0;
+    @include for(ScreenMD) {
+      border-block: none;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 }
 
@@ -63,36 +63,6 @@
 
   @include for(ScreenMD) {
     margin-bottom: 16px;
-  }
-}
-
-.cardHeading {
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-  align-items: center;
-  background-color: $blue-light;
-  padding: 15px;
-  border: 1px solid $active-color;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-
-  .selectCardWrapper {
-    display: flex;
-    align-items: center;
-  }
-
-  .cardIcons {
-    display: flex;
-    flex-wrap: wrap;
-
-    .cardIcon {
-      margin-left: 3px;
-
-      &:last-of-type {
-        cursor: pointer;
-      }
-    }
   }
 }
 
@@ -117,57 +87,37 @@
   }
 }
 
-.deliverySection {
-  .deliveryInputs {
-    display: grid;
-    gap: 16px;
+.paymentSection {
+  .cardHeading {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+    background-color: $blue-light;
+    padding: 15px;
+    border: 1px solid $active-color;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 
-    .fullNameGroup {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+    .selectCardWrapper {
+      display: flex;
+      align-items: center;
     }
 
-    .locationGroup {
-      display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-areas:
-        'city city'
-        'state zip'
-        'country country';
+    .cardIcons {
+      display: flex;
+      flex-wrap: wrap;
 
-      .cityInput {
-        grid-area: city;
-      }
+      .cardIcon {
+        margin-left: 3px;
 
-      .stateInput {
-        grid-area: state;
-      }
-
-      .zipInput {
-        grid-area: zip;
-      }
-
-      .countryInput {
-        grid-area: country;
-
-        > select {
-          height: 56px;
+        &:last-of-type {
+          cursor: pointer;
         }
-      }
-
-      @include for(ScreenLG) {
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-areas:
-          'city state zip'
-          'country country country';
       }
     }
   }
-}
 
-.paymentSection {
   .paymentInputs {
     display: grid;
     gap: 12px;

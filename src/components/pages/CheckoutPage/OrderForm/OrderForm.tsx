@@ -11,8 +11,7 @@ import lock from '@/assets/UI/lock.svg'
 import Button from '@/components/UI/Button/Button'
 import Input from '@/components/UI/Input/Input'
 import RadioInput from '@/components/UI/RadioInput/RadioInput'
-import Select from '@/components/UI/Select/Select'
-import { countries, getStatesByCountry, getCountryByCode } from '@/utils/transformCountryData'
+import { getStatesByCountry, getCountryByCode } from '@/utils/transformCountry'
 import style from './OrderForm.module.scss'
 import { FormattedProduct } from '@/utils/transformProduct'
 import { useOrderContext } from '@/context/OrderContext'
@@ -23,6 +22,7 @@ import {
   formatSecurityCode,
   formatAccountName,
 } from '@/utils/formatPayment/formatPayment'
+import { DeliverySection } from './DeliverySection/DeliverySection'
 
 interface OrderFormProps {
   product: FormattedProduct
@@ -50,7 +50,6 @@ const OrderForm = ({ product }: OrderFormProps) => {
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
     reValidateMode: 'onBlur',
-
     defaultValues: {
       email: '',
       first_name: '',
@@ -112,64 +111,7 @@ const OrderForm = ({ product }: OrderFormProps) => {
           </div>
         </section>
 
-        {/* Delivery Section */}
-        <section className={`${style.formSection} ${style.deliverySection}`}>
-          <h2>Delivery</h2>
-          <div className={style.deliveryInputs}>
-            <div className={style.fullNameGroup}>
-              <Input
-                {...register('first_name')}
-                type="text"
-                placeholder="First Name"
-                error={errors.first_name?.message}
-              />
-              <Input
-                {...register('last_name')}
-                type="text"
-                placeholder="Last Name"
-                error={errors.last_name?.message}
-              />
-            </div>
-            <Input
-              {...register('address')}
-              type="text"
-              placeholder="Address"
-              error={errors.address?.message}
-            />
-            <div className={style.locationGroup}>
-              <Input
-                className={style.cityInput}
-                {...register('city')}
-                type="text"
-                placeholder="City"
-                error={errors.city?.message}
-              />
-              <Select
-                className={style.stateInput}
-                {...register('state')}
-                label="State / Province"
-                options={stateOptions}
-                error={errors.state?.message}
-              />
-              <Input
-                className={style.zipInput}
-                {...register('zip')}
-                type="text"
-                placeholder="ZIP / Postal Code"
-                minLength={3}
-                maxLength={10}
-                error={errors.zip?.message}
-              />
-              <Select
-                className={style.countryInput}
-                {...register('country')}
-                label="Country"
-                options={countries}
-                error={errors.country?.message}
-              />
-            </div>
-          </div>
-        </section>
+        <DeliverySection register={register} errors={errors} stateOptions={stateOptions} />
 
         {/* Payment Section */}
         <section className={`${style.formSection} ${style.paymentSection}`}>

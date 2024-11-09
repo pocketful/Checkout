@@ -9,7 +9,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, error, ...props }, ref) => {
     return (
-      <div className={`${style.inputWrapper} ${className ?? ''}`} data-testid="input-wrapper">
+      <div className={className ?? ''} data-testid="input-wrapper">
         <input
           type={type}
           className={`${style.input} ${error ? style.errInput : ''}`}

@@ -1,16 +1,5 @@
 import { SelectOption } from '@/components/UI/Select/Select'
-import { countryData } from '@/data/countries'
-
-export interface State {
-  name: string
-  isoCode: string
-}
-
-export interface Country {
-  name: string
-  isoCode: string
-  states: State[]
-}
+import { countryData, Country, State } from '@/data/location'
 
 export const transformCountriesToOptions = (): SelectOption[] => {
   return countryData.countries.map(

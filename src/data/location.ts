@@ -1,3 +1,14 @@
+export interface State {
+  name: string
+  isoCode: string
+}
+
+export interface Country {
+  name: string
+  isoCode: string
+  states: State[]
+}
+
 export const countryData = {
   countries: [
     {

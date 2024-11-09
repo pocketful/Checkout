@@ -1,0 +1,47 @@
+.deliveryInputs {
+  display: grid;
+  gap: 16px;
+
+  .fullNameGroup {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .locationGroup {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      'city city'
+      'state zip'
+      'country country';
+      
+    .cityInput {
+      grid-area: city;
+    }    
+
+    .stateInput {
+      grid-area: state;
+    }
+
+    .zipInput {
+      grid-area: zip;
+    }
+    
+    .countryInput {
+      grid-area: country;
+
+      > select {
+        height: 56px;
+      }
+    }
+
+    @include for(ScreenLG) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas:
+        'city state zip'
+        'country country country';
+    }
+  }
+}
