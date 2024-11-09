@@ -26,8 +26,6 @@ import {
   formatAccountName,
 } from '@/utils/formatPayment/formatPayment'
 
-// simulate async
-// const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 interface OrderFormProps {
   product: Product
 }
@@ -53,9 +51,7 @@ const OrderForm = ({ product }: OrderFormProps) => {
   } = useForm<FormValues>({
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
-    // mode: 'onTouched',
-    // mode: 'onBlur',
-    // reValidateMode: 'onBlur',
+    reValidateMode: 'onBlur',
 
     defaultValues: {
       email: '',
@@ -63,9 +59,9 @@ const OrderForm = ({ product }: OrderFormProps) => {
       last_name: '',
       address: '',
       city: '',
-      state: '',
+      state: states[0].value,
       zip: '',
-      country: '',
+      country: countries[0].value,
       card_number: '',
       expiration_date: '',
       security_code: '',
@@ -76,12 +72,7 @@ const OrderForm = ({ product }: OrderFormProps) => {
 
   const paymentMethod = watch('payment_method')
 
-  console.log(' errors: ', errors)
-  // console.log('orderData from localStorage', localStorage.getItem('orderData'))
-
   const onSubmit = (data: FormValues) => {
-    // const onSubmit = async (data: FormValues) => {
-    // await sleep(2000)
     try {
       const orderData = {
         ...data,
@@ -91,7 +82,6 @@ const OrderForm = ({ product }: OrderFormProps) => {
         formattedSubtotal,
         formattedTotal,
       }
-      console.log('orderData: ', orderData)
       localStorage.setItem('orderData', JSON.stringify(orderData))
       reset()
     } catch (error) {

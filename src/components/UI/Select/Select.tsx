@@ -15,10 +15,19 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({ label, options = [], className, error, ...props }, ref) => {
+    const defaultProps = {
+      ...props,
+      defaultValue: props.defaultValue ?? (options.length > 0 ? options[0].value : ''),
+    }
+
     return (
       <div className={`${style.selectGroup} ${className ?? ''}`}>
         {label && <span className={style.label}>{label}</span>}
-        <select className={`${style.select} ${error ? style.errSelect : ''}`} ref={ref} {...props}>
+        <select
+          className={`${style.select} ${error ? style.errSelect : ''}`}
+          ref={ref}
+          {...defaultProps}
+        >
           {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}

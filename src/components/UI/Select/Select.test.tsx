@@ -12,6 +12,8 @@ describe('Select', () => {
     return render(<Select label="Test Label" options={mockOptions} {...props} />)
   }
 
+  const getSelect = (): HTMLSelectElement => screen.getByRole('combobox')
+
   it('renders select with label', () => {
     renderSelect()
     expect(screen.getByText('Test Label')).toBeInTheDocument()
@@ -28,6 +30,16 @@ describe('Select', () => {
   it('applies custom class style', () => {
     renderSelect({ className: 'custom' })
     expect(screen.getByRole('combobox')).toHaveClass('select')
+  })
+
+  it('shows first option as default value when no default provided', () => {
+    renderSelect()
+    expect(getSelect().value).toBe(mockOptions[0].value)
+  })
+
+  it('uses provided default value over first option', () => {
+    renderSelect({ defaultValue: 'CA' })
+    expect(getSelect().value).toBe('CA')
   })
 
   it('forwards ref correctly', () => {

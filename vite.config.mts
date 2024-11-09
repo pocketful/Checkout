@@ -8,11 +8,10 @@ export default defineConfig({
     devSourcemap: true,
     preprocessorOptions: {
       scss: {
-        quietDeps: true,
         additionalData: `
-          @use "src/styles/colors" as *;
-          @use "src/styles/typography" as *;
-          @use "src/styles/sizes" as *;
+        @use "src/styles/colors" as *;
+        @use "src/styles/typography" as *;
+        @use "src/styles/sizes" as *;
         `,
       },
     },
