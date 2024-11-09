@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { validationSchema } from '@/utils/validation'
@@ -12,8 +12,7 @@ import Button from '@/components/UI/Button/Button'
 import Input from '@/components/UI/Input/Input'
 import RadioInput from '@/components/UI/RadioInput/RadioInput'
 import Select from '@/components/UI/Select/Select'
-import { states } from '@/data/states'
-import { countries } from '@/data/countries'
+import { countries, getStatesByCountry } from '@/utils/transformCountryData'
 import style from './OrderForm.module.scss'
 import { useProductPricing } from '@/hooks/useProductPricing'
 import { Product } from '@/data/product'
@@ -33,6 +32,11 @@ interface OrderFormProps {
 const OrderForm = ({ product }: OrderFormProps) => {
   const [focusedField, setFocusedField] = useState<string | null>(null)
 
+  const initialStateOptions = useMemo(() => getStatesByCountry('US'), [])
+  const [stateOptions, setStateOptions] = useState(initialStateOptions)
+
+  const initialStateValue = initialStateOptions[0]?.value || ''
+
   const { warranty } = useOrderContext()
 
   const { formattedPrice, formattedSubtotal, formattedTotal } = useProductPricing({
@@ -48,6 +52,7 @@ const OrderForm = ({ product }: OrderFormProps) => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<FormValues>({
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
@@ -59,9 +64,9 @@ const OrderForm = ({ product }: OrderFormProps) => {
       last_name: '',
       address: '',
       city: '',
-      state: states[0].value,
+      state: initialStateValue,
       zip: '',
-      country: countries[0].value,
+      country: 'US',
       card_number: '',
       expiration_date: '',
       security_code: '',
@@ -71,6 +76,13 @@ const OrderForm = ({ product }: OrderFormProps) => {
   })
 
   const paymentMethod = watch('payment_method')
+  const selectedCountry = watch('country')
+
+  useEffect(() => {
+    const newStateOptions = getStatesByCountry(selectedCountry)
+    setStateOptions(newStateOptions)
+    setValue('state', newStateOptions[0]?.value ?? '')
+  }, [selectedCountry, setValue])
 
   const onSubmit = (data: FormValues) => {
     try {
@@ -141,7 +153,7 @@ const OrderForm = ({ product }: OrderFormProps) => {
                 className={style.stateInput}
                 {...register('state')}
                 label="State / Province"
-                options={states}
+                options={stateOptions}
                 error={errors.state?.message}
               />
               <Input
