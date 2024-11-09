@@ -1,0 +1,86 @@
+.subtitle {
+  @extend %font-xs-regular;
+
+  color: $gray-4;
+  margin-bottom: 12px;
+
+  @include for(ScreenMD) {
+    margin-bottom: 16px;
+  }
+}
+
+.cardHeading {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  background-color: $blue-light;
+  padding: 15px;
+  border: 1px solid $active-color;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  .selectCardWrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .cardIcons {
+    display: flex;
+    flex-wrap: wrap;
+
+    .cardIcon {
+      margin-left: 3px;
+
+      &:last-of-type {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.paymentInputs {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  background-color: $form-background-color;
+  border: solid $gray-3;
+  border-width: 0 1px 1px;
+
+  .coupleInputs {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+> button {
+  margin-top: 12px;
+}
+
+.secureWrapper {
+  @extend %font-s-regular;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $gray-4;
+  margin-top: 16px;
+
+  .lockIcon {
+    margin-right: 8px;
+    margin-top: 2px;
+    height: 14px;
+  }
+
+  // margin-top: 4px;
+  > span {
+    height: 14px;
+  }
+}
+
+@include for(ScreenMD) {
+  > button {
+    margin-top: 16px;
+  }
+}
