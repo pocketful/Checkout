@@ -12,10 +12,9 @@ import Button from '@/components/UI/Button/Button'
 import Input from '@/components/UI/Input/Input'
 import RadioInput from '@/components/UI/RadioInput/RadioInput'
 import Select from '@/components/UI/Select/Select'
-import { countries, getStatesByCountry } from '@/utils/transformCountryData'
+import { countries, getStatesByCountry, getCountryByCode } from '@/utils/transformCountryData'
 import style from './OrderForm.module.scss'
-import { useProductPricing } from '@/hooks/useProductPricing'
-import { Product } from '@/data/product'
+import { FormattedProduct } from '@/utils/transformProduct'
 import { useOrderContext } from '@/context/OrderContext'
 import { FormValues } from '@/types/orderForm'
 import {
@@ -26,7 +25,7 @@ import {
 } from '@/utils/formatPayment/formatPayment'
 
 interface OrderFormProps {
-  product: Product
+  product: FormattedProduct
 }
 
 const OrderForm = ({ product }: OrderFormProps) => {
@@ -38,12 +37,6 @@ const OrderForm = ({ product }: OrderFormProps) => {
   const initialStateValue = initialStateOptions[0]?.value || ''
 
   const { warranty } = useOrderContext()
-
-  const { formattedPrice, formattedSubtotal, formattedTotal } = useProductPricing({
-    price: product.price,
-    quantity: product.quantity,
-    currency: product.currency,
-  })
 
   const {
     register,
@@ -79,9 +72,14 @@ const OrderForm = ({ product }: OrderFormProps) => {
   const selectedCountry = watch('country')
 
   useEffect(() => {
-    const newStateOptions = getStatesByCountry(selectedCountry)
-    setStateOptions(newStateOptions)
-    setValue('state', newStateOptions[0]?.value ?? '')
+    try {
+      const country = getCountryByCode(selectedCountry)
+      const newStateOptions = country ? getStatesByCountry(country.isoCode) : []
+      setStateOptions(newStateOptions)
+      setValue('state', newStateOptions[0]?.value ?? '')
+    } catch (error) {
+      console.error('Error updating state options:', error)
+    }
   }, [selectedCountry, setValue])
 
   const onSubmit = (data: FormValues) => {
@@ -90,9 +88,6 @@ const OrderForm = ({ product }: OrderFormProps) => {
         ...data,
         warranty,
         product,
-        formattedPrice,
-        formattedSubtotal,
-        formattedTotal,
       }
       localStorage.setItem('orderData', JSON.stringify(orderData))
       reset()

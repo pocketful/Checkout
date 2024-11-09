@@ -2,7 +2,7 @@ import Header from '@/components/Header/Header'
 import Summary from './Summary/Summary'
 import OrderForm from './OrderForm/OrderForm'
 import Benefits from './Benefits/Benefits'
-import { product } from '@/data/product'
+import { formattedProduct } from '@/utils/transformProduct'
 import style from './CheckoutPage.module.scss'
 
 function CheckoutPage() {
@@ -12,10 +12,10 @@ function CheckoutPage() {
       <div className={style.containerWrapper}>
         <main className={style.container}>
           <div className={style.sectionSummary}>
-            <Summary product={product} />
+            <Summary product={formattedProduct} />
           </div>
           <div className={style.sectionOrderForm}>
-            <OrderForm product={product} />
+            <OrderForm product={formattedProduct} />
           </div>
           <div className={style.sectionBenefits}>
             <Benefits />

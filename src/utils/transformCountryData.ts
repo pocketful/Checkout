@@ -22,7 +22,7 @@ export const transformCountriesToOptions = (): SelectOption[] => {
 }
 
 export const getStatesByCountry = (countryCode: string): SelectOption[] => {
-  const country = countryData.countries.find((c) => c.isoCode === countryCode)
+  const country = getCountryByCode(countryCode)
   return (
     country?.states?.map(
       (state: State): SelectOption => ({
@@ -31,6 +31,10 @@ export const getStatesByCountry = (countryCode: string): SelectOption[] => {
       }),
     ) ?? []
   )
+}
+
+export const getCountryByCode = (countryCode: string): Country | undefined => {
+  return countryData.countries.find((c) => c.isoCode === countryCode)
 }
 
 export const countries = transformCountriesToOptions()

@@ -1,25 +1,18 @@
 import { useState } from 'react'
 import arrowDown from '@/assets/UI/arrow-down.svg'
-import { Product } from '@/data/product'
-import style from './Summary.module.scss'
-import { useProductPricing } from '@/hooks/useProductPricing'
+import { FormattedProduct } from '@/utils/transformProduct'
 import { useOrderContext } from '@/context/OrderContext'
+import style from './Summary.module.scss'
 
 interface SummaryProps {
-  product: Product
+  product: FormattedProduct
 }
 
 const Summary = ({ product }: SummaryProps) => {
-  const { title, price, quantity, currency, image } = product
+  const { title, quantity, image, formattedPrice, formattedSubtotal, formattedTotal } = product
 
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
   const { warranty } = useOrderContext()
-
-  const { formattedPrice, formattedSubtotal, formattedTotal } = useProductPricing({
-    price,
-    quantity,
-    currency,
-  })
 
   return (
     <section className={`${style.summary} ${isExpanded ? style.expanded : ''}`}>
