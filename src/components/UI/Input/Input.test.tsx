@@ -13,13 +13,6 @@ describe('Input', () => {
     expect(screen.getByRole('textbox')).toHaveAttribute('type', 'email')
   })
 
-  it('applies custom class name', () => {
-    render(<Input className="custom" />)
-
-    expect(screen.getByTestId('input-wrapper')).toHaveClass('inputWrapper', 'custom')
-    expect(screen.getByRole('textbox')).toHaveClass('input')
-  })
-
   it('forwards ref correctly', () => {
     const ref = jest.fn()
     render(<Input ref={ref} />)

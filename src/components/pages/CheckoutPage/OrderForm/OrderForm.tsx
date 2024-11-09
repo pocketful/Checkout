@@ -1,16 +1,15 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { validationSchema } from '@/utils/validation'
-import Input from '@/components/UI/Input/Input'
-import { getStatesByCountry, getCountryByCode } from '@/utils/transformCountry'
-import style from './OrderForm.module.scss'
-import { FormattedProduct } from '@/utils/transformProduct'
 import { useOrderContext } from '@/context/OrderContext'
 import { FormValues } from '@/types/orderForm'
-
+import { ContactSection } from './ContactSection/ContactSection'
 import { DeliverySection } from './DeliverySection/DeliverySection'
 import { PaymentFieldName, PaymentSection } from './PaymentSection/PaymentSection'
+import { getStatesByCountry, getCountryByCode } from '@/utils/transformCountry'
+import { FormattedProduct } from '@/utils/transformProduct'
+import { validationSchema } from '@/utils/validation'
+import style from './OrderForm.module.scss'
 
 interface OrderFormProps {
   product: FormattedProduct
@@ -87,18 +86,7 @@ const OrderForm = ({ product }: OrderFormProps) => {
   return (
     <article className={style.orderForm}>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        {/* Contact Section */}
-        <section className={style.formSection}>
-          <h2>Contact</h2>
-          <div>
-            <Input
-              {...register('email')}
-              type="email"
-              placeholder="Email Address"
-              error={errors.email?.message}
-            />
-          </div>
-        </section>
+        <ContactSection register={register} errors={errors} />
         <DeliverySection register={register} errors={errors} stateOptions={stateOptions} />
         <PaymentSection
           register={register}

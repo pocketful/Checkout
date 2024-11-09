@@ -93,7 +93,7 @@ export const PaymentSection = ({
               <Input
                 {...field}
                 type="tel"
-                placeholder="MM/YY"
+                placeholder="Expiration (MM/YY)"
                 maxLength={5}
                 onFocus={() => setFocusedField('expiration_date')}
                 onBlur={() => {
@@ -157,6 +157,7 @@ export const PaymentSection = ({
         </div>
       </div>
     </div>
+    {/* move to OrderForm */}
     <Button type="submit">Complete Order</Button>
     <div className={style.secureWrapper}>
       <img className={style.lockIcon} src={lock} alt="lock" />
