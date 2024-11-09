@@ -1,4 +1,4 @@
-import { Product, product } from '@/data/product'
+import { Product } from '@/data/product'
 import { formatCurrency } from '@/utils/formatCurrency'
 
 export interface FormattedProduct extends Product {
@@ -7,17 +7,9 @@ export interface FormattedProduct extends Product {
   formattedTotal: string
 }
 
-export const transformProduct = (initialProduct: Product): FormattedProduct => ({
+export const transformProduct = (initialProduct: Product, currency: string): FormattedProduct => ({
   ...initialProduct,
-  formattedPrice: formatCurrency(initialProduct.price, initialProduct.currency),
-  formattedSubtotal: formatCurrency(
-    initialProduct.price * initialProduct.quantity,
-    initialProduct.currency,
-  ),
-  formattedTotal: formatCurrency(
-    initialProduct.price * initialProduct.quantity,
-    initialProduct.currency,
-  ),
+  formattedPrice: formatCurrency(initialProduct.price, currency),
+  formattedSubtotal: formatCurrency(initialProduct.price * initialProduct.quantity, currency),
+  formattedTotal: formatCurrency(initialProduct.price * initialProduct.quantity, currency),
 })
-
-export const formattedProduct: FormattedProduct = transformProduct(product)

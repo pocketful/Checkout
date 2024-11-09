@@ -2,20 +2,25 @@ import Header from '@/components/Header/Header'
 import Summary from './Summary/Summary'
 import OrderForm from './OrderForm/OrderForm'
 import Benefits from './Benefits/Benefits'
-import { formattedProduct } from '@/utils/transformProduct'
+import { product } from '@/data/product'
+import { transformProduct } from '@/utils/transformProduct'
+import { useOrderContext } from '@/context/OrderContext'
 import style from './CheckoutPage.module.scss'
 
 function CheckoutPage() {
+  const { currency } = useOrderContext()
+  const transformedProduct = transformProduct(product, currency)
+
   return (
     <>
       <Header />
       <div className={style.containerWrapper}>
         <main className={style.container}>
           <div className={style.sectionSummary}>
-            <Summary product={formattedProduct} />
+            <Summary product={transformedProduct} />
           </div>
           <div className={style.sectionOrderForm}>
-            <OrderForm product={formattedProduct} />
+            <OrderForm product={transformedProduct} />
           </div>
           <div className={style.sectionBenefits}>
             <Benefits />

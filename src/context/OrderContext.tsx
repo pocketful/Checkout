@@ -1,6 +1,8 @@
 import { createContext, useContext, ReactNode, useState } from 'react'
 
 interface OrderContextProps {
+  currency: string
+  setCurrency: (value: string) => void
   warranty: boolean
   setWarranty: (value: boolean) => void
 }
@@ -14,7 +16,12 @@ export const useOrderContext = () => {
 }
 
 export const OrderProvider = ({ children }: { children: ReactNode }) => {
+  const [currency, setCurrency] = useState<string>('$')
   const [warranty, setWarranty] = useState<boolean>(false)
 
-  return <OrderContext.Provider value={{ warranty, setWarranty }}>{children}</OrderContext.Provider>
+  return (
+    <OrderContext.Provider value={{ currency, setCurrency, warranty, setWarranty }}>
+      {children}
+    </OrderContext.Provider>
+  )
 }
