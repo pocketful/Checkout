@@ -76,7 +76,6 @@ const OrderForm = ({ product }: OrderFormProps) => {
         product,
       }
       localStorage.setItem('orderData', JSON.stringify(orderData))
-      console.log(orderData)
       reset()
     } catch (error) {
       console.error('Form submission error:', error)

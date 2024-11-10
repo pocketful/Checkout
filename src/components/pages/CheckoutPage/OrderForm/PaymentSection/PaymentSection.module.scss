@@ -1,3 +1,13 @@
+.payment {
+  > button {
+    margin-top: 12px;
+
+    @include for(ScreenMD) {
+      margin-top: 16px;
+    }
+  }
+}
+
 .subtitle {
   @extend %font-xs-regular;
 
@@ -31,6 +41,13 @@
 
     .cardIcon {
       margin-left: 3px;
+      display: inline;
+
+      // temp
+      &:nth-child(2),
+      &:nth-child(3) {
+        margin-left: 2px;
+      }
 
       &:last-of-type {
         cursor: pointer;
@@ -54,10 +71,6 @@
   }
 }
 
-button {
-  margin-top: 12px;
-}
-
 .secureWrapper {
   @extend %font-s-regular;
 
@@ -66,21 +79,13 @@ button {
   justify-content: center;
   color: $gray-4;
   margin-top: 16px;
+  height: 20px;
 
   .lockIcon {
     margin-right: 8px;
-    margin-top: 2px;
-    height: 14px;
   }
 
-  // margin-top: 4px;
   > span {
-    height: 14px;
-  }
-}
-
-@include for(ScreenMD) {
-  button {
-    margin-top: 16px;
+    height: 16px;
   }
 }

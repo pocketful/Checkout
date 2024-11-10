@@ -39,7 +39,7 @@ export const PaymentSection = ({
   setFocusedField,
   paymentMethod,
 }: PaymentSectionProps) => (
-  <section>
+  <section className={style.payment}>
     <h2>Payment</h2>
     <p className={style.subtitle}>All transactions are secure and encrypted.</p>
     <div className={style.card}>
