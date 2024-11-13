@@ -5,11 +5,12 @@ import { useOrderContext } from '@/context/OrderContext'
 import { FormValues } from '@/types/orderForm'
 import { ContactSection } from './ContactSection/ContactSection'
 import { DeliverySection } from './DeliverySection/DeliverySection'
-import { PaymentFieldName, PaymentSection } from './PaymentSection/PaymentSection'
+import { PaymentSection, PaymentFieldName } from './PaymentSection/PaymentSection'
 import { getStatesByCountry, getCountryByCode } from '@/utils/transformCountry'
 import { FormattedProduct } from '@/utils/transformProduct'
 import { validationSchema } from '@/utils/validation'
 import style from './OrderForm.module.scss'
+import { SubmissionStatus } from '@/components/UI/StatusMessage/StatusMessage'
 
 interface OrderFormProps {
   product: FormattedProduct
@@ -17,6 +18,7 @@ interface OrderFormProps {
 
 const OrderForm = ({ product }: OrderFormProps) => {
   const [focusedField, setFocusedField] = useState<PaymentFieldName>(null)
+  const [submissionStatus, setSubmissionStatus] = useState<SubmissionStatus>(null)
 
   const initialStateOptions = useMemo(() => getStatesByCountry('US'), [])
   const [stateOptions, setStateOptions] = useState(initialStateOptions)
@@ -76,9 +78,11 @@ const OrderForm = ({ product }: OrderFormProps) => {
         product,
       }
       localStorage.setItem('orderData', JSON.stringify(orderData))
+      setSubmissionStatus('success')
       reset()
     } catch (error) {
       console.error('Form submission error:', error)
+      setSubmissionStatus('error')
     }
   }
 
@@ -93,6 +97,7 @@ const OrderForm = ({ product }: OrderFormProps) => {
           focusedField={focusedField}
           setFocusedField={setFocusedField}
           paymentMethod={paymentMethod}
+          submissionStatus={submissionStatus}
         />
       </form>
     </article>

@@ -3,6 +3,7 @@ import { FormValues, PaymentMethod } from '@/types/orderForm'
 import Input from '@/components/UI/Input/Input'
 import RadioInput from '@/components/UI/RadioInput/RadioInput'
 import Button from '@/components/UI/Button/Button'
+import { SubmissionStatus, StatusMessage } from '@/components/UI/StatusMessage/StatusMessage'
 import amex from '@/assets/cards/card-amex.svg'
 import visa from '@/assets/cards/card-visa.svg'
 import mastercard from '@/assets/cards/card-mastercard.svg'
@@ -30,6 +31,7 @@ interface PaymentSectionProps {
   focusedField: PaymentFieldName
   setFocusedField: (field: PaymentFieldName) => void
   paymentMethod: PaymentMethod
+  submissionStatus: SubmissionStatus
 }
 
 export const PaymentSection = ({
@@ -38,6 +40,7 @@ export const PaymentSection = ({
   focusedField,
   setFocusedField,
   paymentMethod,
+  submissionStatus,
 }: PaymentSectionProps) => (
   <section className={style.payment}>
     <h2>Payment</h2>
@@ -159,6 +162,7 @@ export const PaymentSection = ({
     </div>
     {/* move to OrderForm */}
     <Button type="submit">Complete Order</Button>
+    <StatusMessage status={submissionStatus} />
     <div className={style.secureWrapper}>
       <img className={style.lockIcon} src={lock} alt="lock" />
       <span>All transactions are secure and encrypted</span>
