@@ -12,9 +12,10 @@ function CheckoutPage() {
   const transformedProduct = transformProduct(product, currency)
 
   return (
-    <>
+    <div className={style.pageContainer}>
       <Header />
-      <div className={style.containerWrapper}>
+      <div className={style.contentContainer}>
+        <div className={style.leftEdge}></div>
         <main className={style.container}>
           <div className={style.sectionSummary}>
             <Summary product={transformedProduct} />
@@ -26,8 +27,9 @@ function CheckoutPage() {
             <Benefits />
           </div>
         </main>
+        <div className={style.rightEdge}></div>
       </div>
-    </>
+    </div>
   )
 }
 
