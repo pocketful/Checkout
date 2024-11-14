@@ -1,6 +1,6 @@
 # 🛒 Checkout Page
 
-A single-page React checkout form.
+A single-page responsive checkout form.
 
 ## 🎨 Main features
 
@@ -10,7 +10,7 @@ A single-page React checkout form.
 - Dynamic country/state selection
 - Order data persistence in localStorage
 
-# 🔧 Technologies used
+## 🔧 Technologies used
 
 - JavaScript library: [React](https://reactjs.org/)
 - TypeScript support: [TypeScript](https://www.typescriptlang.org/)
@@ -24,10 +24,10 @@ A single-page React checkout form.
 - Build tool: [Vite](https://vitejs.dev/)
 - Package manager: [pnpm](https://pnpm.io/)
 
-# 🚀 Getting started
+## 🚀 Getting started
 
 [![Node.js Version](https://img.shields.io/badge/node-v20.11.1-339933?logo=nodedotjs)](https://nodejs.org/)
-[![pnpm Version](https://img.shields.io/badge/pnpm-v9.2.0-F69220?logo=pnpm)](https://www.npmjs.com/package/pnpm/v/9.2.0)
+[![pnpm Version](https://img.shields.io/badge/pnpm-v8.15.8-F69220?logo=pnpm)](https://www.npmjs.com/package/pnpm/v/8.15.8)
 
 ### 🎈 Start the project
 

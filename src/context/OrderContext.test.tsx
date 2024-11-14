@@ -1,6 +1,15 @@
 import { render, renderHook, act, screen } from '@testing-library/react'
 import { useOrderContext, OrderProvider } from './OrderContext'
 
+// suppress the console errors
+const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
+beforeAll(() => {
+  consoleSpy.mockClear()
+})
+afterAll(() => {
+  consoleSpy.mockRestore()
+})
+
 describe('OrderContext', () => {
   it('should render children inside OrderProvider', () => {
     render(
